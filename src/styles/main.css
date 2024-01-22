@@ -1,0 +1,67 @@
+.app {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
+.hx-h1 {
+  text-align: start !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+.hx-h2 {
+  text-align: start !important;
+
+  font-size: 20px !important;
+  font-weight: 600;
+}
+
+.hx-h3 {
+  text-align: start !important;
+
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.mycenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bdr-l {
+  border-left: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.bdr-r {
+  border-right: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.bdr-t {
+  border-top: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.bdr-b {
+  border-bottom: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.bdr-all {
+  border: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.nav-btn-gradient {
+  background-image: linear-gradient(
+    208.15deg,
+    #3466f6 -4.22%,
+    #3466f6 -4.21%,
+    #7c3aed 102.68%
+  );
+}
+
+.nav-btn-gradient-hover:hover {
+  background-image: linear-gradient(
+    208.15deg,
+    #3466f6 -4.22%,
+    #3466f6 -4.21%,
+    #7c3aed 102.68%
+  );
+}
