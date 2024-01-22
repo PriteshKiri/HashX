@@ -8,6 +8,12 @@ const SideBarStatusContext = createContext<boolean | undefined>(undefined);
 const SetLogOutContext = createContext<
   React.Dispatch<React.SetStateAction<boolean>> | undefined
 >(undefined);
+declare global {
+  interface Window {
+    chrome: any;
+  }
+}
+
 const Layout = ({ children }: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("profile");
@@ -70,7 +76,7 @@ const Layout = ({ children }: any) => {
                 transform: "rotate(180deg)",
                 transition: "all",
               }}
-              width="30"
+              width="22"
               height="44"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -93,7 +99,7 @@ const Layout = ({ children }: any) => {
                 transform: "rotate(180deg)",
                 transition: "all",
               }}
-              width="30"
+              width="22"
               height="44"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -130,7 +136,7 @@ const Layout = ({ children }: any) => {
               style={{
                 height: "20px",
               }}
-              width="30"
+              width="22"
               height="44"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -164,7 +170,7 @@ const Layout = ({ children }: any) => {
               style={{
                 height: "20px",
               }}
-              width="30"
+              width="22"
               height="44"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -215,11 +221,13 @@ const Layout = ({ children }: any) => {
                 paddingRight: "12px",
               }}
               onClick={() => {
-                localStorage.setItem("sxs_key", "");
-                if (!logout) {
-                  showSnackbar("Logged out successfully!", 3, "logout");
+                if (window.chrome) {
+                  window.chrome.storage.local.set({ username: "" }).then(() => {
+                    console.log("value is set");
+                    // showSnackbar("Logged out successfully!", 3, "logout");
+                    setLogout(true);
+                  });
                 }
-                setLogout(true);
               }}
             >
               <svg
@@ -229,7 +237,7 @@ const Layout = ({ children }: any) => {
                   width: "24px",
                   height: "24px",
                 }}
-                width="30"
+                width="22"
                 height="44"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"

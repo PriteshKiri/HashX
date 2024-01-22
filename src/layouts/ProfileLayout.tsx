@@ -82,7 +82,14 @@ interface UserQueryVars {
   username: string;
 }
 
+declare global {
+  interface Window {
+    chrome: any;
+  }
+}
+
 const ProfileLayout = () => {
+  const logout: any = useContext(LogOutContext);
   const usernameRef = useRef<HTMLInputElement>(null);
   const [getUser, { loading, error, data }] = useLazyQuery<
     UserQueryData,
@@ -93,11 +100,22 @@ const ProfileLayout = () => {
     event.preventDefault();
     const newUsername = usernameRef.current?.value;
     if (newUsername) {
-      getUser({ variables: { username: newUsername } });
+      if (window.chrome) {
+        window.chrome.storage.local.set({ username: newUsername }).then(() => {
+          console.log("value is set");
+          getUser({ variables: { username: newUsername } });
+        });
+      }
     }
   };
 
-  console.log(data);
+  useEffect(() => {
+    window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+      if (username) {
+        getUser({ variables: { username } });
+      }
+    });
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
@@ -109,17 +127,19 @@ const ProfileLayout = () => {
           ref={usernameRef}
           type="text"
           placeholder="Enter username"
-          style={{ marginRight: "10px" }}
+          style={{ marginRight: "10px", color: "black" }}
         />
         <button
           type="submit"
-          style={{ padding: "5px 10px", background: "white" }}
+          style={{ padding: "5px 10px", background: "white", color: "black" }}
         >
           Submit
         </button>
       </form>
-      <h1 style={{ color: "white" }}>HLLOO : {data?.user?.name}</h1>
-      <img src={data?.user?.profilePicture} alt="" />
+
+        <h1 style={{ color: "white" }}>HLLOO : {data?.user?.name}</h1>
+        <img src={data?.user?.profilePicture} alt="" />
+
     </div>
   );
 };
