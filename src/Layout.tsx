@@ -41,7 +41,7 @@ const Layout = ({ children }: any) => {
           left: "-50px", // Assuming '--left-[50px]' is a typo and should be 'left-50px'
           width: "50px",
           backgroundColor: "black",
-          height: "380px",
+          height: "220px",
           borderTopLeftRadius: "8px",
           borderBottomLeftRadius: "8px",
           display: "flex",
@@ -154,7 +154,7 @@ const Layout = ({ children }: any) => {
               cursor: "pointer",
             }}
             className={`mycenter ${
-              tab === "profile" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
+              tab === "feed" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
             } `}
             onClick={() => setTab("feed")}
           >
@@ -182,7 +182,7 @@ const Layout = ({ children }: any) => {
         </Tooltip>
       </nav>
       <div
-        className={"bdl-l"}
+        className={"bdr-l"}
         style={{
           backgroundColor: "black",
           transition: "all",
@@ -193,7 +193,7 @@ const Layout = ({ children }: any) => {
         <div
           style={{
             height: "50px",
-            width: "100%", // 'hx-w-full' corresponds to full width
+            width: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",

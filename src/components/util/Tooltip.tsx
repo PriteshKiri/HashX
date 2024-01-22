@@ -70,9 +70,10 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children }) => {
               color: "white",
               borderRadius: "4px",
               boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-              background: "white",
+
               fontSize: "12px",
             }}
+            className="nav-btn-gradient"
           >
             {content}
           </div>
