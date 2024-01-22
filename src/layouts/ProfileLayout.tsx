@@ -1,18 +1,127 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef, FormEvent } from "react";
 import { LogOutContext, SetLogOutContext } from "../Layout";
 import Loader from "../components/util/Loader";
 import { copyToClipboard, useSnackbar } from "../util";
 import SnackBar from "../components/util/SnackBar";
+import { useQuery, gql, useLazyQuery } from "@apollo/client";
+
+const GET_USER = gql`
+  query GetUser($username: String!) {
+    user(username: $username) {
+      location
+      profilePicture
+      name
+      bio {
+        text
+      }
+      socialMediaLinks {
+        website
+      }
+      badges {
+        id
+        name
+      }
+      publications(first: 5) {
+        edges {
+          node {
+            title
+            displayTitle
+            descriptionSEO
+          }
+          cursor
+          role
+        }
+      }
+      posts(pageSize: 10, page: 10) {
+        edges {
+          node {
+            title
+          }
+        }
+        nodes {
+          title
+        }
+      }
+    }
+  }
+`;
+
+interface UserData {
+  location: string;
+  profilePicture: string;
+  name: string;
+  bio: { text: string };
+  socialMediaLinks: { website: string };
+  badges: Array<{ id: string; name: string }>;
+  publications: {
+    edges: Array<{
+      node: {
+        title: string;
+        displayTitle: string;
+        descriptionSEO: string;
+      };
+      cursor: string;
+      role: string;
+    }>;
+  };
+  posts: {
+    edges: Array<{
+      node: {
+        title: string;
+      };
+    }>;
+    nodes: Array<{ title: string }>;
+  };
+}
+
+interface UserQueryData {
+  user: UserData;
+}
+
+interface UserQueryVars {
+  username: string;
+}
 
 const ProfileLayout = () => {
-  const [inputKey, setInputKey]: any = useState("");
-  const [fetchMode, setFetchMode] = useState(false);
-  const [userDetails, setUserDetails]: any = useState({});
-  const logout: any = useContext(LogOutContext);
-  const setLogOut: any = useContext(SetLogOutContext);
-  const { snackbar, showSnackbar }: any = useSnackbar();
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const [getUser, { loading, error, data }] = useLazyQuery<
+    UserQueryData,
+    UserQueryVars
+  >(GET_USER);
 
-  return <h1 className="hx-h1">hello profile</h1>;
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const newUsername = usernameRef.current?.value;
+    if (newUsername) {
+      getUser({ variables: { username: newUsername } });
+    }
+  };
+
+  console.log(data);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
+        <input
+          ref={usernameRef}
+          type="text"
+          placeholder="Enter username"
+          style={{ marginRight: "10px" }}
+        />
+        <button
+          type="submit"
+          style={{ padding: "5px 10px", background: "white" }}
+        >
+          Submit
+        </button>
+      </form>
+      <h1 style={{ color: "white" }}>HLLOO : {data?.user?.name}</h1>
+      <img src={data?.user?.profilePicture} alt="" />
+    </div>
+  );
 };
 
 export default ProfileLayout;

@@ -1,6 +1,7 @@
 const path = require("path");
 const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
+
 module.exports = {
   entry: "./src/index.tsx",
   mode: "production",
@@ -19,11 +20,12 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.css?$/,
         use: [
           "style-loader",
           "css-loader",
           {
-            loader: "postcss-loader", // postcss loader needed for tailwindcss
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
                 ident: "postcss",
@@ -32,8 +34,8 @@ module.exports = {
             },
           },
         ],
-        test: /\.css?$/,
       },
+      // ... add rules for other file types as needed
     ],
   },
   resolve: {
@@ -43,4 +45,6 @@ module.exports = {
     filename: "content.js",
     path: path.resolve(__dirname, ".", "extension"),
   },
+  // Optional: Add source map support
+  devtool: "source-map", // or 'inline-source-map' for development
 };
