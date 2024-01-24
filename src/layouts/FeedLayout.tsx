@@ -95,8 +95,8 @@ const FeedLayout = () => {
           flexDirection: "column",
           overflowY: "scroll",
           height: "85vh",
-          padding: "10px",
-          gap: 10,
+          padding: "15px",
+          gap: 15,
         }}
       >
         {data?.feed?.edges
@@ -111,7 +111,7 @@ const FeedLayout = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 8,
-                backgroundColor: "#0f1620",
+                backgroundColor: "#0e1a2b",
               }}
             >
               <div
