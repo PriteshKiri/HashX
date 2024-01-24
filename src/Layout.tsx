@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import Tooltip from "./components/util/Tooltip";
 import { useSnackbar } from "./util";
 import SnackBar from "./components/util/SnackBar";
@@ -23,6 +23,15 @@ const Layout = ({ children }: any) => {
     setOpen(!open);
   };
 
+  useEffect(() => {
+    window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+      if (!username) {
+        setLogout(true);
+      } else {
+        setLogout(false);
+      }
+    });
+  }, []);
   return (
     <div
       style={{
@@ -199,7 +208,7 @@ const Layout = ({ children }: any) => {
         <div
           style={{
             height: "50px",
-            width: "100%",
+            width: "400px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -261,22 +270,39 @@ const Layout = ({ children }: any) => {
           </SetLogOutContext.Provider>
         </SideBarStatusContext.Provider>
 
-        {/* footer
+        {/* footer */}
         {open && (
           <div
-            className={`hx-h-[30px] hx-w-[376px] hx-text-white mycenter hx-bg-grey hx-px-[12px] bdr-t bdr-l hx-absolute hx-bottom-0 hx-right-0 hx-bg-black`}
+            style={{
+              height: "30px",
+              width: "400px",
+              color: "white",
+              // Add custom mycenter styles here
+              paddingLeft: "12px",
+              paddingRight: "12px",
+              // Add custom bdr-t and bdr-l styles here
+              position: "relative",
+              bottom: "0",
+              right: "0",
+              backgroundColor: "black", // Note: This overrides the previous backgroundColor
+            }}
+            className="mycenter bdr-t bdr-l"
           >
-            <small className="hx-text-[11px]">
+            <small style={{ fontSize: "11px" }}>
               Made with &lt; 🧠 /&gt; by{" "}
               <a
                 href="https://twitter.com/PriteshKiri"
-                className="hx-text-white hx-sxs-link hx-hover:underline"
+                style={{
+                  color: "white",
+                  // Add custom hx-sxs-link styles here
+                  // Implement hover effect with JavaScript or another method
+                }}
               >
                 Pritesh Kiri
               </a>
             </small>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

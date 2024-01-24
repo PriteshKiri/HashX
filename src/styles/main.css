@@ -10,16 +10,18 @@
 }
 .hx-h2 {
   text-align: start !important;
-
   font-size: 20px !important;
   font-weight: 600;
 }
 
 .hx-h3 {
   text-align: start !important;
-
   font-size: 16px !important;
   font-weight: 400 !important;
+}
+
+.hx-p {
+  font-size: 12px !important;
 }
 
 .mycenter {
