@@ -40,3 +40,15 @@ const copyToClipboard = (text: string) => {
 };
 
 export { copyToClipboard, useSnackbar };
+
+
+ export const  formatDate =(dateStr: string): string =>{
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(dateStr);
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${months[monthIndex]} ${day}, ${year}`;
+}

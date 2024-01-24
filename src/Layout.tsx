@@ -64,7 +64,9 @@ const Layout = ({ children }: any) => {
           alignItems: "center",
           justifyContent: "space-around",
           gap: "4px",
+          boxShadow: "-3px 5px 30px -3px black",
         }}
+        className="bdr-all"
       >
         {/* Sidebar opener arrow */}
         <div
@@ -134,7 +136,7 @@ const Layout = ({ children }: any) => {
               borderRadius: "6px",
               cursor: "pointer",
             }}
-            className={`mycenter ${
+            className={`mycenter bdr-all ${
               tab === "profile" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
             } `}
             onClick={() => setTab("profile")}
@@ -168,7 +170,7 @@ const Layout = ({ children }: any) => {
               borderRadius: "6px",
               cursor: "pointer",
             }}
-            className={`mycenter ${
+            className={`mycenter bdr-all ${
               tab === "feed" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
             } `}
             onClick={() => setTab("feed")}
@@ -277,16 +279,12 @@ const Layout = ({ children }: any) => {
               height: "30px",
               width: "400px",
               color: "white",
-              // Add custom mycenter styles here
-              paddingLeft: "12px",
-              paddingRight: "12px",
-              // Add custom bdr-t and bdr-l styles here
-              position: "relative",
+              position: "absolute",
               bottom: "0",
               right: "0",
-              backgroundColor: "black", // Note: This overrides the previous backgroundColor
+              backgroundColor: "black",
             }}
-            className="mycenter bdr-t bdr-l"
+            className="mycenter bdr-t"
           >
             <small style={{ fontSize: "11px" }}>
               Made with &lt; 🧠 /&gt; by{" "}
@@ -294,8 +292,6 @@ const Layout = ({ children }: any) => {
                 href="https://twitter.com/PriteshKiri"
                 style={{
                   color: "white",
-                  // Add custom hx-sxs-link styles here
-                  // Implement hover effect with JavaScript or another method
                 }}
               >
                 Pritesh Kiri

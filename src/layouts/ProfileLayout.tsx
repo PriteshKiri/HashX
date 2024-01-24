@@ -28,11 +28,11 @@ const GET_USER = gql`
         linkedin
         youtube
       }
-      publications(first: 5) {
+      publications(first: 10) {
         edges {
           node {
             title
-            posts(first: 5) {
+            posts(first: 10) {
               edges {
                 node {
                   title
@@ -43,7 +43,7 @@ const GET_USER = gql`
           }
         }
       }
-      posts(pageSize: 5, page: 5) {
+      posts(pageSize: 10, page: 10) {
         edges {
           node {
             title
@@ -176,33 +176,80 @@ const ProfileLayout = () => {
       }}
     >
       {logout ? (
-<div>
-<div
+        <div style={{ flexDirection: "column" }} className="mycenter">
+          <div
             style={{
               height: "120px",
               width: "120px",
               margin: "auto",
               borderRadius: "50%",
-              backgroundImage: `url(${data?.user?.profilePicture})`,
+              backgroundImage: `url("https://res.cloudinary.com/ddlhk5yje/image/upload/v1705917787/hashx/hashx_bkm3wo.png")`,
               backgroundSize: "cover",
-              marginTop: "15px",
+              marginTop: "120px",
             }}
           ></div>
-<form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
-          <input
-            ref={usernameRef}
-            type="text"
-            placeholder="Enter username"
-            style={{ marginRight: "10px", color: "black" }}
-          />
-          <button
-            type="submit"
-            style={{ padding: "5px 10px", background: "white", color: "black" }}
+          <h1 className="hx-h1" style={{ textAlign: "center", margin: "auto" }}>
+            HashX
+          </h1>
+          <p style={{ textAlign: "center", color: "#94a3b8" }}>
+            World's first Hasnode eXtension
+          </p>
+
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              marginBottom: "20px",
+              marginTop: "30px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            Submit
-          </button>
-        </form>
-</div>
+            <input
+              ref={usernameRef}
+              type="text"
+              placeholder="Enter hashnode username"
+              className="hx-input"
+            />
+            <small
+              style={{
+                textAlign: "center",
+                margin: "10px",
+                fontSize: "10px",
+                width: "85%",
+              }}
+            >
+              For example here,{" "}
+              <a className="hx-link" href="https://hashnode.com/@Pritesh16">
+                https://hashnode.com/@Pritesh16
+              </a>{" "}
+              , the username is "Pritesh16"
+            </small>
+            <div
+              className="mycenter"
+              style={{
+                gap: 15,
+                marginTop: 15,
+                justifyContent: "space-between",
+              }}
+            >
+              <button
+                className="hx-button"
+                onClick={() => {
+                  if (usernameRef.current) {
+                    usernameRef.current.value = "";
+                  }
+                }}
+              >
+                Clear
+              </button>
+              <button type="submit" className="hx-button">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       ) : (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
