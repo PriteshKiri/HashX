@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useRef, FormEvent } from "react";
-import { LogOutContext, SetLogOutContext } from "../Layout";
+import { LogOutContext, SetLogOutContext, SetPATContext } from "../Layout";
 import Loader from "../components/util/Loader";
 import { copyToClipboard, useSnackbar } from "../util";
 import SnackBar from "../components/util/SnackBar";
@@ -7,8 +7,8 @@ import { useQuery, gql, useLazyQuery } from "@apollo/client";
 import SocialMediaLinks from "../components/SocialMediaLinks";
 
 const GET_USER = gql`
-  query GetUser($username: String!) {
-    user(username: $username) {
+  {
+    me {
       location
       profilePicture
       name
@@ -104,7 +104,7 @@ interface UserData {
 }
 
 interface UserQueryData {
-  user: UserData;
+  me: UserData;
 }
 interface SocialMediaLinksProps {
   website?: string;
@@ -117,10 +117,6 @@ interface SocialMediaLinksProps {
   youtube?: string;
 }
 
-interface UserQueryVars {
-  username: string;
-}
-
 declare global {
   interface Window {
     chrome: any;
@@ -129,41 +125,84 @@ declare global {
 
 const ProfileLayout = () => {
   const logout: any = useContext(LogOutContext);
-  const setLogOut: any = useContext(SetLogOutContext);
+  const setLogOut: any = useContext(SetLogOutContext);  
+  const setGlobalPAT: any = useContext(SetPATContext);
+  const [pat, setPat] = useState("");
+  const [fetchMode, setFetchMode] = useState(false);
 
   const usernameRef = useRef<HTMLInputElement>(null);
-  const [getUser, { loading, error, data }] = useLazyQuery<
-    UserQueryData,
-    UserQueryVars
-  >(GET_USER);
+  const [getUser, { loading, error, data }] = useLazyQuery<UserQueryData>(
+    GET_USER,
+    {
+      context: {
+        headers: {
+          Authorization: pat,
+        },
+      },
+    }
+  );
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const newUsername = usernameRef.current?.value;
-    if (newUsername) {
+    setGlobalPAT(pat)
+    if (pat) {
       if (window.chrome) {
-        window.chrome.storage.local.set({ username: newUsername }).then(() => {
+        window.chrome.storage.local.set({ username: pat }).then(() => {
           console.log("value is set");
-          getUser({ variables: { username: newUsername } });
+          getUser();
           setLogOut(false);
         });
       }
     }
+
+    // if (pat) {
+    //   if (window.chrome) {
+    //     window.chrome.storage.local.set({ username: pat }).then(() => {
+    //       console.log("value is set");
+    //       getUser();
+    //       setLogOut(false);
+    //     });
+    //   }
+    // }
   };
 
   console.log(logout);
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+      console.log(username);
       if (username) {
-        getUser({ variables: { username } });
-        setLogOut(false);
+        setPat(username);
+        setGlobalPAT(username)
+        setTimeout(() => {
+          getUser();
+        }, 2000);
+      } else {
+        setLogOut(true);
       }
     });
   }, []);
 
+  // useEffect(() => {
+  //   window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+  //     console.log(username);
+
+  //     if (!username) {
+  //       setFetchMode(false);
+  //     }
+  //   });
+  // }, [logout]);
+
+  // useEffect(() => {
+
+  //   if (fetchMode) {
+  //     getUser();
+  //   }
+  // }, [fetchMode]);
+
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  // if (error) return <p>Error : {error.message}</p>;
 
   return (
     <div
@@ -175,7 +214,7 @@ const ProfileLayout = () => {
         padding: "20px",
       }}
     >
-      {logout ? (
+      {logout || error ? (
         <div style={{ flexDirection: "column" }} className="mycenter">
           <div
             style={{
@@ -196,7 +235,6 @@ const ProfileLayout = () => {
           </p>
 
           <form
-            onSubmit={handleSubmit}
             style={{
               marginBottom: "20px",
               marginTop: "30px",
@@ -207,7 +245,10 @@ const ProfileLayout = () => {
             }}
           >
             <input
-              ref={usernameRef}
+              onChange={(e) => {
+                setPat(e.target.value);
+              }}
+              value={pat}
               type="text"
               placeholder="Enter hashnode username"
               className="hx-input"
@@ -237,14 +278,16 @@ const ProfileLayout = () => {
               <button
                 className="hx-button"
                 onClick={() => {
-                  if (usernameRef.current) {
-                    usernameRef.current.value = "";
-                  }
+                  setPat("");
                 }}
               >
                 Clear
               </button>
-              <button type="submit" className="hx-button">
+              <button
+                type="submit"
+                className="hx-button"
+                onClick={handleSubmit}
+              >
                 Submit
               </button>
             </div>
@@ -258,7 +301,7 @@ const ProfileLayout = () => {
               width: "120px",
               margin: "auto",
               borderRadius: "50%",
-              backgroundImage: `url(${data?.user?.profilePicture})`,
+              backgroundImage: `url(${data?.me?.profilePicture})`,
               backgroundSize: "cover",
               marginTop: "15px",
             }}
@@ -272,34 +315,34 @@ const ProfileLayout = () => {
             }}
             className="hx-h1"
           >
-            {data?.user?.name}
+            {data?.me?.name}
           </h1>
           <p className="hx-p" style={{ textAlign: "center" }}>
-            {data?.user?.tagline}
+            {data?.me?.tagline}
           </p>
           <div style={{ display: "flex", gap: 25, justifyContent: "center" }}>
             <p>
               <span style={{ fontWeight: 600 }}>
-                {data?.user?.followersCount}
+                {data?.me?.followersCount}
               </span>{" "}
-              Followers
+              {data?.me?.followersCount ? "Followers" : "loading..."}
             </p>
             <p>
               <span style={{ fontWeight: 600 }}>
-                {data?.user?.followingsCount}
+                {data?.me?.followingsCount}
               </span>{" "}
-              Following
+              {data?.me?.followingsCount && "Following"}
             </p>
           </div>
           <SocialMediaLinks
-            website={data?.user?.socialMediaLinks?.website}
-            github={data?.user?.socialMediaLinks?.github}
-            twitter={data?.user?.socialMediaLinks?.twitter}
-            instagram={data?.user?.socialMediaLinks?.instagram}
-            facebook={data?.user?.socialMediaLinks?.facebook}
-            stackoverflow={data?.user?.socialMediaLinks?.stackoverflow}
-            linkedin={data?.user?.socialMediaLinks?.linkedin}
-            youtube={data?.user?.socialMediaLinks?.youtube}
+            website={data?.me?.socialMediaLinks?.website}
+            github={data?.me?.socialMediaLinks?.github}
+            twitter={data?.me?.socialMediaLinks?.twitter}
+            instagram={data?.me?.socialMediaLinks?.instagram}
+            facebook={data?.me?.socialMediaLinks?.facebook}
+            stackoverflow={data?.me?.socialMediaLinks?.stackoverflow}
+            linkedin={data?.me?.socialMediaLinks?.linkedin}
+            youtube={data?.me?.socialMediaLinks?.youtube}
           />
           <div
             style={{
@@ -309,8 +352,8 @@ const ProfileLayout = () => {
               gap: "10px",
             }}
           >
-            {Boolean(data?.user?.posts?.edges?.length) &&
-              data?.user?.posts?.edges?.map((post) => {
+            {Boolean(data?.me?.posts?.edges?.length) &&
+              data?.me?.posts?.edges?.map((post) => {
                 return (
                   <div
                     style={{
@@ -361,8 +404,8 @@ const ProfileLayout = () => {
               gap: "10px",
             }}
           >
-            {Boolean(data?.user?.publications?.edges.length) &&
-              data?.user?.publications?.edges
+            {Boolean(data?.me?.publications?.edges.length) &&
+              data?.me?.publications?.edges
                 ?.find((item) => item.node.title === "")
                 ?.node.posts.edges.map((post) => {
                   return (

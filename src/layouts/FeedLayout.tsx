@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/util/Loader";
 import { useLazyQuery, gql } from "@apollo/client";
 import { formatDate } from "../util";
 import Blog from "../components/Blog";
+import { PATContext } from "../Layout";
 
 // GraphQL query
 const GET_FEED = gql`
   {
-    feed(first: 20) {
+    feed(first: 20, filter: { type: BOOKMARKS }) {
       edges {
         node {
           title
@@ -55,8 +56,17 @@ interface UserQueryData {
 }
 
 const FeedLayout = () => {
-  const [getFeed, { loading, data, error }] =
-    useLazyQuery<UserQueryData>(GET_FEED);
+  const globalPAT: any = useContext(PATContext);
+  const [getFeed, { loading, data, error }] = useLazyQuery<UserQueryData>(
+    GET_FEED,
+    {
+      context: {
+        headers: {
+          Authorization: globalPAT,
+        },
+      },
+    }
+  );
   const [hasFetched, setHasFetched] = useState(false);
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");

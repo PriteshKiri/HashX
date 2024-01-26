@@ -3,10 +3,14 @@ import Tooltip from "./components/util/Tooltip";
 import { useSnackbar } from "./util";
 import SnackBar from "./components/util/SnackBar";
 const TabContext = createContext<string | undefined>(undefined);
+const PATContext = createContext<string | undefined>(undefined);
 const LogOutContext = createContext<boolean | undefined>(undefined);
 const SideBarStatusContext = createContext<boolean | undefined>(undefined);
 const SetLogOutContext = createContext<
   React.Dispatch<React.SetStateAction<boolean>> | undefined
+>(undefined);
+const SetPATContext = createContext<
+  React.Dispatch<React.SetStateAction<string>> | undefined
 >(undefined);
 declare global {
   interface Window {
@@ -18,6 +22,7 @@ const Layout = ({ children }: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("profile");
   const [logout, setLogout] = useState<boolean | any>(false);
+  const [globalPAT, setGlobalPAT] = useState<string | any>(false);
   const { snackbar, showSnackbar }: any = useSnackbar();
   const openSidebar = () => {
     setOpen(!open);
@@ -28,6 +33,7 @@ const Layout = ({ children }: any) => {
       if (!username) {
         setLogout(true);
       } else {
+        setGlobalPAT(username);
         setLogout(false);
       }
     });
@@ -232,6 +238,7 @@ const Layout = ({ children }: any) => {
                 paddingRight: "12px",
               }}
               onClick={() => {
+                setGlobalPAT("");
                 if (window.chrome) {
                   window.chrome.storage.local.set({ username: "" }).then(() => {
                     console.log("value is set");
@@ -267,7 +274,13 @@ const Layout = ({ children }: any) => {
         <SideBarStatusContext.Provider value={open}>
           <SetLogOutContext.Provider value={setLogout}>
             <LogOutContext.Provider value={logout}>
-              <TabContext.Provider value={tab}>{children}</TabContext.Provider>
+              <SetPATContext.Provider value={setGlobalPAT}>
+                <PATContext.Provider value={globalPAT}>
+                  <TabContext.Provider value={tab}>
+                    {children}
+                  </TabContext.Provider>
+                </PATContext.Provider>
+              </SetPATContext.Provider>
             </LogOutContext.Provider>
           </SetLogOutContext.Provider>
         </SideBarStatusContext.Provider>
@@ -310,4 +323,6 @@ export {
   LogOutContext,
   SetLogOutContext,
   SideBarStatusContext,
+  PATContext,
+  SetPATContext,
 };
