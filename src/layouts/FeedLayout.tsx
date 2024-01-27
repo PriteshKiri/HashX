@@ -3,7 +3,7 @@ import Loader from "../components/util/Loader";
 import { useLazyQuery, gql } from "@apollo/client";
 import { formatDate } from "../util";
 import Blog from "../components/Blog";
-import { PATContext } from "../Layout";
+import { PATContext, SetPATContext } from "../Layout";
 
 // GraphQL query
 const GET_FEED = gql`
@@ -56,40 +56,91 @@ interface UserQueryData {
 }
 
 const FeedLayout = () => {
-  const globalPAT: any = useContext(PATContext);
-  const [getFeed, { loading, data, error }] = useLazyQuery<UserQueryData>(
-    GET_FEED,
-    {
-      context: {
-        headers: {
-          Authorization: globalPAT,
-        },
-      },
-    }
-  );
-  const [hasFetched, setHasFetched] = useState(false);
+  const setGlobalPAT: any = useContext(SetPATContext);
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");
+  const [fetchMode, setFetchMode] = useState(false);
+  const [pat, setPAT]: any = useState("");
+  const [feedData, setFeedData]: any = useState({});
 
   // Fetch data when the component mounts (or based on specific events)
+
   useEffect(() => {
-    getFeed();
-    setHasFetched(true);
-  }, [getFeed]);
+    window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+      console.log(username, "usererrfet");
 
-  if (!hasFetched) {
-    return <p>Fetching feed...</p>;
-  }
+      if (username !== "" || username !== null || username !== undefined) {
+        setPAT(username);
+        setGlobalPAT(username);
+        setFetchMode(true);
+      } else {
+        setFetchMode(false);
+      }
+    });
+  }, []);
 
-  console.log(data);
+  useEffect(() => {
+    if (fetchMode) {
+      const query = `
+      {
+        feed(first: 20, filter: { type: BOOKMARKS }) {
+          edges {
+            node {
+              title
+              url
+              id
+              brief
+              publishedAt
+              coverImage {
+                url
+              }
+              reactionCount
+              views
+              author {
+                name
+                profilePicture
+                username
+              }
+            }
+          }
+        }
+      }
+      `;
+
+      const endpoint = "https://gql.hashnode.com"; // Replace with your actual GraphQL API endpoint
+
+      try {
+        fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: pat, // Set your authorization token here
+            // Any other headers your API requires
+          },
+          body: JSON.stringify({ query }),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            if (response?.errors?.length) {
+              setFetchMode(false);
+            } else {
+              setFeedData(response);
+            }
+          })
+          .catch((err) => console.error(err));
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+        // Handle errors, such as by setting an error state or showing an error message
+      }
+    }
+  }, [fetchMode]);
 
   const handleRead = (id: string) => {
     setBlogId(id);
     setShowBlog(true);
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : </p>;
   // Render your data or handle the empty state
   if (showBlog) {
     return (
@@ -109,9 +160,9 @@ const FeedLayout = () => {
           gap: 15,
         }}
       >
-        {data?.feed?.edges
-          ?.filter((item) => Boolean(item?.node?.coverImage))
-          .map((item) => (
+        {feedData?.data?.feed?.edges
+          ?.filter((item: any) => Boolean(item?.node?.coverImage))
+          .map((item: any) => (
             <div
               className="bdr-all"
               style={{

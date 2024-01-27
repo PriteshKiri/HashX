@@ -5,6 +5,7 @@ import { copyToClipboard, useSnackbar } from "../util";
 import SnackBar from "../components/util/SnackBar";
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 import SocialMediaLinks from "../components/SocialMediaLinks";
+import Profile from "../components/Profile";
 
 const GET_USER = gql`
   {
@@ -125,84 +126,139 @@ declare global {
 
 const ProfileLayout = () => {
   const logout: any = useContext(LogOutContext);
-  const setLogOut: any = useContext(SetLogOutContext);  
+  const setLogOut: any = useContext(SetLogOutContext);
   const setGlobalPAT: any = useContext(SetPATContext);
-  const [pat, setPat] = useState("");
-  const [fetchMode, setFetchMode] = useState(false);
+  const [userDetails, setUserDetails]: any = useState({});
+  const [pat, setPAT]: any = useState("");
 
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const [getUser, { loading, error, data }] = useLazyQuery<UserQueryData>(
-    GET_USER,
-    {
-      context: {
-        headers: {
-          Authorization: pat,
-        },
-      },
-    }
-  );
+  const [fetchMode, setFetchMode] = useState(false);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const newUsername = usernameRef.current?.value;
-    setGlobalPAT(pat)
+
+    setGlobalPAT(pat);
     if (pat) {
+      console.log(pat, "new user name");
       if (window.chrome) {
         window.chrome.storage.local.set({ username: pat }).then(() => {
-          console.log("value is set");
-          getUser();
-          setLogOut(false);
+          console.log(pat, "value is set");
+          setFetchMode(true);
         });
       }
     }
-
-    // if (pat) {
-    //   if (window.chrome) {
-    //     window.chrome.storage.local.set({ username: pat }).then(() => {
-    //       console.log("value is set");
-    //       getUser();
-    //       setLogOut(false);
-    //     });
-    //   }
-    // }
   };
 
   console.log(logout);
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username);
-      if (username) {
-        setPat(username);
-        setGlobalPAT(username)
-        setTimeout(() => {
-          getUser();
-        }, 2000);
+      console.log(username, "usererrfet");
+
+      if (username !== "" || username !== null || username !== undefined) {
+        setPAT(username);
+        setGlobalPAT(username);
+        setFetchMode(true);
       } else {
         setLogOut(true);
+        setFetchMode(false);
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-  //     console.log(username);
+  useEffect(() => {
+    window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
+      console.log(username, "usererrfet");
+      if (username === "" || username === null || username === undefined) {
+        setFetchMode(false);
+      }
+    });
+  }, [logout]);
 
-  //     if (!username) {
-  //       setFetchMode(false);
-  //     }
-  //   });
-  // }, [logout]);
+  useEffect(() => {
+    if (fetchMode) {
+      const query = `
+      {
+        me {
+          location
+          profilePicture
+          name
+          followersCount
+          followingsCount
+          bio {
+            text
+          }
+          tagline
+          socialMediaLinks {
+            website
+            github
+            twitter
+            instagram
+            facebook
+            stackoverflow
+            linkedin
+            youtube
+          }
+          publications(first: 10) {
+            edges {
+              node {
+                title
+                posts(first: 10) {
+                  edges {
+                    node {
+                      title
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          posts(pageSize: 10, page: 10) {
+            edges {
+              node {
+                title
+                url
+              }
+            }
+            nodes {
+              title
+            }
+          }
+        }
+      }
+    
+      `;
 
-  // useEffect(() => {
+      const endpoint = "https://gql.hashnode.com"; // Replace with your actual GraphQL API endpoint
 
-  //   if (fetchMode) {
-  //     getUser();
-  //   }
-  // }, [fetchMode]);
-
-  if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error : {error.message}</p>;
+      try {
+        fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: pat, // Set your authorization token here
+            // Any other headers your API requires
+          },
+          body: JSON.stringify({ query }),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            if (response?.errors?.length) {
+              setLogOut(true);
+              setFetchMode(false);
+            } else {
+              setLogOut(false);
+              setUserDetails(response);
+            }
+          })
+          .catch((err) => console.error(err));
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+        // Handle errors, such as by setting an error state or showing an error message
+      }
+    }
+  }, [fetchMode]);
 
   return (
     <div
@@ -214,7 +270,7 @@ const ProfileLayout = () => {
         padding: "20px",
       }}
     >
-      {logout || error ? (
+      {logout && (
         <div style={{ flexDirection: "column" }} className="mycenter">
           <div
             style={{
@@ -234,7 +290,7 @@ const ProfileLayout = () => {
             World's first Hasnode eXtension
           </p>
 
-          <form
+          <div
             style={{
               marginBottom: "20px",
               marginTop: "30px",
@@ -246,7 +302,7 @@ const ProfileLayout = () => {
           >
             <input
               onChange={(e) => {
-                setPat(e.target.value);
+                setPAT(e.target.value);
               }}
               value={pat}
               type="text"
@@ -275,182 +331,25 @@ const ProfileLayout = () => {
                 justifyContent: "space-between",
               }}
             >
-              <button
-                className="hx-button"
-                onClick={() => {
-                  setPat("");
-                }}
-              >
-                Clear
-              </button>
+              <button className="hx-button">Clear</button>
               <button
                 type="submit"
                 className="hx-button"
-                onClick={handleSubmit}
+                onClick={(e) => handleSubmit(e)}
               >
                 Submit
               </button>
             </div>
-          </form>
-        </div>
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              height: "120px",
-              width: "120px",
-              margin: "auto",
-              borderRadius: "50%",
-              backgroundImage: `url(${data?.me?.profilePicture})`,
-              backgroundSize: "cover",
-              marginTop: "15px",
-            }}
-          ></div>
-          <h1
-            style={{
-              color: "white",
-              margin: "auto",
-              textAlign: "center",
-              marginTop: "15px",
-            }}
-            className="hx-h1"
-          >
-            {data?.me?.name}
-          </h1>
-          <p className="hx-p" style={{ textAlign: "center" }}>
-            {data?.me?.tagline}
-          </p>
-          <div style={{ display: "flex", gap: 25, justifyContent: "center" }}>
-            <p>
-              <span style={{ fontWeight: 600 }}>
-                {data?.me?.followersCount}
-              </span>{" "}
-              {data?.me?.followersCount ? "Followers" : "loading..."}
-            </p>
-            <p>
-              <span style={{ fontWeight: 600 }}>
-                {data?.me?.followingsCount}
-              </span>{" "}
-              {data?.me?.followingsCount && "Following"}
-            </p>
-          </div>
-          <SocialMediaLinks
-            website={data?.me?.socialMediaLinks?.website}
-            github={data?.me?.socialMediaLinks?.github}
-            twitter={data?.me?.socialMediaLinks?.twitter}
-            instagram={data?.me?.socialMediaLinks?.instagram}
-            facebook={data?.me?.socialMediaLinks?.facebook}
-            stackoverflow={data?.me?.socialMediaLinks?.stackoverflow}
-            linkedin={data?.me?.socialMediaLinks?.linkedin}
-            youtube={data?.me?.socialMediaLinks?.youtube}
-          />
-          <div
-            style={{
-              marginTop: "10px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            {Boolean(data?.me?.posts?.edges?.length) &&
-              data?.me?.posts?.edges?.map((post) => {
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "5px 10px",
-                      borderRadius: "8px",
-                    }}
-                    className="bdr-all"
-                  >
-                    <p style={{ color: "#94a3b8", fontSize: "12px" }}>
-                      {post?.node?.title}
-                    </p>
-                    <a
-                      href={post?.node?.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-external-link"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#ffffff"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-                        <path d="M11 13l9 -9" />
-                        <path d="M15 4h5v5" />
-                      </svg>
-                    </a>
-                  </div>
-                );
-              })}
-          </div>
-
-          <div
-            style={{
-              marginTop: "10px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            {Boolean(data?.me?.publications?.edges.length) &&
-              data?.me?.publications?.edges
-                ?.find((item) => item.node.title === "")
-                ?.node.posts.edges.map((post) => {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "5px 10px",
-                        borderRadius: "8px",
-                      }}
-                      className="bdr-all"
-                    >
-                      <p style={{ color: "#94a3b8", fontSize: "12px" }}>
-                        {post?.node?.title}
-                      </p>
-                      <a
-                        href={post?.node?.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-external-link"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#94a3b8"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-                          <path d="M11 13l9 -9" />
-                          <path d="M15 4h5v5" />
-                        </svg>
-                      </a>
-                    </div>
-                  );
-                })}
           </div>
         </div>
       )}
+
+      {!logout &&
+        (Object.keys(userDetails)?.length !== 0 ? (
+          <Profile data={userDetails?.data} />
+        ) : (
+          <h1>Loading....</h1>
+        ))}
     </div>
   );
 };
