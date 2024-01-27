@@ -148,13 +148,13 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
       </div>
 
       <div>
-        <h1 style={{ textAlign: "center", fontSize: 24, fontWeight: 600 }}>
+        <h1 style={{ textAlign: "center", fontSize: 20, fontWeight: 600 }}>
           {data?.post?.title}
         </h1>
         <h2
           style={{
             textAlign: "center",
-            fontSize: 20,
+            fontSize: 116,
             fontWeight: 500,
             color: "#9b9b9b",
           }}

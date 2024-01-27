@@ -29,7 +29,9 @@
   border-radius: 25px;
   width: fit-content;
   padding: 10px 20px;
+  border: none;
 }
+
 .hx-button:hover {
   background: #67a0ff;
 }
@@ -166,6 +168,11 @@
   color: gray;
 }
 
+.post-details iframe {
+  width: 100%;
+  height: auto;
+}
+
 .post-details pre {
   border: none;
   box-shadow: 2px 2px 8px rgb(40, 40, 40);
@@ -175,4 +182,32 @@
   color: #fafafa;
   background-color: #1e293b;
   overflow-x: auto;
+  font-size: 12px;
+}
+
+.feeds-tab {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  align-items: center;
+  gap: 3px;
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.feeds-tab:hover {
+  background-color: #0f172a;
+}
+
+.feeds-tab-active {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  align-items: center;
+  gap: 3px;
+  border-radius: 30px;
+  padding: 10px;
+  background-color: #0f172a;
 }

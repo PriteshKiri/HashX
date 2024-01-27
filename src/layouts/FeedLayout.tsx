@@ -4,6 +4,10 @@ import { useLazyQuery, gql } from "@apollo/client";
 import { formatDate } from "../util";
 import Blog from "../components/Blog";
 import { PATContext, SetPATContext } from "../Layout";
+import FeedCard from "../components/FeedCard";
+import Personalized from "../components/feeds/Personalized";
+import Following from "../components/feeds/Following";
+import Featured from "../components/feeds/Featured";
 
 // GraphQL query
 const GET_FEED = gql`
@@ -62,79 +66,12 @@ const FeedLayout = () => {
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
   const [feedData, setFeedData]: any = useState({});
-
+  const [tabType, setTabType] = useState("personalized");
   // Fetch data when the component mounts (or based on specific events)
 
-  useEffect(() => {
-    window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
 
-      if (username !== "" || username !== null || username !== undefined) {
-        setPAT(username);
-        setGlobalPAT(username);
-        setFetchMode(true);
-      } else {
-        setFetchMode(false);
-      }
-    });
-  }, []);
 
-  useEffect(() => {
-    if (fetchMode) {
-      const query = `
-      {
-        feed(first: 20, filter: { type: BOOKMARKS }) {
-          edges {
-            node {
-              title
-              url
-              id
-              brief
-              publishedAt
-              coverImage {
-                url
-              }
-              reactionCount
-              views
-              author {
-                name
-                profilePicture
-                username
-              }
-            }
-          }
-        }
-      }
-      `;
 
-      const endpoint = "https://gql.hashnode.com"; // Replace with your actual GraphQL API endpoint
-
-      try {
-        fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: pat, // Set your authorization token here
-            // Any other headers your API requires
-          },
-          body: JSON.stringify({ query }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            console.log(response);
-            if (response?.errors?.length) {
-              setFetchMode(false);
-            } else {
-              setFeedData(response);
-            }
-          })
-          .catch((err) => console.error(err));
-      } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        // Handle errors, such as by setting an error state or showing an error message
-      }
-    }
-  }, [fetchMode]);
 
   const handleRead = (id: string) => {
     setBlogId(id);
@@ -154,222 +91,99 @@ const FeedLayout = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          overflowY: "scroll",
-          height: "85vh",
-          padding: "15px",
-          gap: 15,
         }}
       >
-        {feedData?.data?.feed?.edges
-          ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => (
-            <div
-              className="bdr-all"
-              style={{
-                padding: 10,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 8,
-                backgroundColor: "#0e1a2b",
-              }}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            padding: "15px",
+          }}
+          className="bdr-b"
+        >
+          <div
+            className={
+              tabType === "personalized" ? "feeds-tab-active" : "feeds-tab"
+            }
+            onClick={() => setTabType("personalized")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-wand"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <div
-                style={{
-                  height: "185px",
-                  width: "100%",
-                  borderRadius: "8px",
-                  backgroundImage: `url(${item?.node?.coverImage?.url})`,
-                  backgroundSize: "cover",
-                }}
-              ></div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "100%",
-                  margin: "15px 0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 5,
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      backgroundImage: `url(${item?.node?.author?.profilePicture})`,
-                      backgroundSize: "cover",
-                    }}
-                  ></div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "start",
-                      gap: 2,
-                    }}
-                  >
-                    <p className="hx-p" style={{ margin: "0px" }}>
-                      {item?.node?.author?.name}
-                    </p>
-                    <small
-                      style={{
-                        color: "rgb(148, 163, 184)",
-                        fontStyle: "italic",
-                      }}
-                    >
-                      @{item?.node?.author?.username}
-                    </small>
-                  </div>
-                </div>
-
-                <p className="hx-p">{formatDate(item?.node?.publishedAt)}</p>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "start",
-                  gap: 5,
-                  margin: "5px 0px",
-                }}
-              >
-                <h3 className="hx-h3" style={{ margin: 0 }}>
-                  {item?.node?.title}
-                </h3>
-                <p
-                  style={{
-                    margin: 0,
-                    color: "rgb(148, 163, 184)",
-                    fontSize: 10,
-                  }}
-                  dangerouslySetInnerHTML={{ __html: item?.node?.brief || "" }}
-                ></p>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "100%",
-                  margin: "15px 0px 5px 0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: 3,
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-heart"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#ff4500"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                    </svg>
-                    <small>{item?.node?.reactionCount}</small>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: 3,
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-eye"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#00abfb"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                    </svg>
-                    <small>{item?.node?.reactionCount}</small>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "5px",
-                  }}
-                >
-                  <button
-                    className="hx-button"
-                    style={{ padding: "5px 15px", backgroundColor: "#0064ff" }}
-                    onClick={() => handleRead(item?.node?.id)}
-                  >
-                    Read
-                  </button>
-                  <a
-                    href={item?.node?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-external-link"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#94a3b8"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-                      <path d="M11 13l9 -9" />
-                      <path d="M15 4h5v5" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M6 21l15 -15l-3 -3l-15 15l3 3" />
+              <path d="M15 6l3 3" />
+              <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+              <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+            </svg>{" "}
+            <p style={{ margin: 0 }}>Personalized</p>
+          </div>
+          <div
+            className={
+              tabType === "following" ? "feeds-tab-active" : "feeds-tab"
+            }
+            onClick={() => setTabType("following")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-users"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+              <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+            </svg>
+            <p style={{ margin: 0 }}>Following</p>
+          </div>
+          <div
+            className={
+              tabType === "featured" ? "feeds-tab-active" : "feeds-tab"
+            }
+            onClick={() => setTabType("featured")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-star"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+            </svg>
+            <p style={{ margin: 0 }}>Featured</p>
+          </div>
+        </div>
+                {tabType === "personalized" ? (
+         <Personalized handleRead={handleRead}/>
+      ) : tabType === "following" ? (
+        <Following handleRead={handleRead}/>
+      ) : (
+        <Featured handleRead={handleRead}/>
+      )}
       </div>
     );
   }
