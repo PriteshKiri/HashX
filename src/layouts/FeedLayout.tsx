@@ -1,10 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import Loader from "../components/util/Loader";
-import { useLazyQuery, gql } from "@apollo/client";
-import { formatDate } from "../util";
+import { useContext, useState } from "react";
+import {  gql } from "@apollo/client";
 import Blog from "../components/Blog";
-import { PATContext, SetPATContext } from "../Layout";
-import FeedCard from "../components/FeedCard";
+import {  SetPATContext } from "../Layout";
 import Personalized from "../components/feeds/Personalized";
 import Following from "../components/feeds/Following";
 import Featured from "../components/feeds/Featured";

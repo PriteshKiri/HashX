@@ -4,12 +4,9 @@ import FeedCard from "../FeedCard";
 
 const Personalized = ({ handleRead }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
-  const [showBlog, setShowBlog] = useState(false);
-  const [blogId, setBlogId] = useState("");
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
   const [feedData, setFeedData]: any = useState({});
-  const [tabType, setTabType] = useState("personalized");
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
       console.log(username, "usererrfet");
