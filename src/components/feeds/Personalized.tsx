@@ -26,7 +26,7 @@ const Personalized = ({ handleRead }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 20, filter: { type: PERSONALIZED }) {
+            feed(first: 40, filter: { type: PERSONALIZED }) {
               edges {
                 node {
                   title

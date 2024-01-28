@@ -26,7 +26,7 @@ const Featured = ({ handleRead }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 20, filter: { type: FEATURED }) {
+            feed(first: 40, filter: { type: FEATURED }) {
               edges {
                 node {
                   title

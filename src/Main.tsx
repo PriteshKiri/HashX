@@ -8,6 +8,7 @@ import {
 } from "./Layout";
 import FeedLayout from "./layouts/FeedLayout";
 import BookmarkLayout from "./layouts/BookmarkLayout";
+import SearchLayout from "./layouts/SearchLayout";
 
 const Main = (): any => {
   const tab: any = useContext(TabContext);
@@ -34,7 +35,7 @@ const Main = (): any => {
     return <BookmarkLayout />;
   }
   if (tab === "search") {
-    return <FeedLayout />;
+    return <SearchLayout />;
   }
 };
 

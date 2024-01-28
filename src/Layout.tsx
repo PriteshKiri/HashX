@@ -41,7 +41,7 @@ const Layout = ({ children }: any) => {
   return (
     <div
       style={{
-        fontFamily: "sans-serif", // Assuming 'hx-font-sans' sets a sans-serif font
+        fontFamily: "sans-serif", 
         display: "flex",
         zIndex: 9999999,
         position: "fixed",

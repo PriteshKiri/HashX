@@ -26,7 +26,7 @@ const Following = ({ handleRead }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 20, filter: { type: FOLLOWING }) {
+            feed(first: 40, filter: { type: FOLLOWING }) {
               edges {
                 node {
                   title
