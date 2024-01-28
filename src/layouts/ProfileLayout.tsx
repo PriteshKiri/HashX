@@ -265,9 +265,6 @@ const ProfileLayout = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        overflowY: "scroll",
-        height: "85vh",
-        padding: "20px",
         paddingTop: 0,
       }}
     >
@@ -301,10 +298,31 @@ const ProfileLayout = () => {
           <h1 className="hx-h1" style={{ textAlign: "center", margin: "auto" }}>
             HashX
           </h1>
-          <p style={{ textAlign: "center", color: "#94a3b8" }}>
-            World's first Hasnode eXtension
+          <p
+            style={{ textAlign: "center", color: "#94a3b8", marginTop: "5px" }}
+          >
+            World's first Hashnode eXtension
           </p>
-
+          <small
+            style={{
+              textAlign: "center",
+              margin: "10px",
+              fontSize: "10px",
+              width: "85%",
+              marginTop: "20px",
+              color: "#b7b7b7",
+            }}
+          >
+            Please enter your Personal Access token. Click{" "}
+            <a
+              className="hx-link"
+              href="https://hashnode.com/settings/developer"
+              target="__blank"
+            >
+              here
+            </a>{" "}
+            to generate.
+          </small>
           <div
             style={{
               marginBottom: "20px",
@@ -321,23 +339,10 @@ const ProfileLayout = () => {
               }}
               value={pat}
               type="text"
-              placeholder="Enter hashnode username"
+              placeholder="Enter Personal Access Token"
               className="hx-input"
             />
-            <small
-              style={{
-                textAlign: "center",
-                margin: "10px",
-                fontSize: "10px",
-                width: "85%",
-              }}
-            >
-              For example here,{" "}
-              <a className="hx-link" href="https://hashnode.com/@Pritesh16">
-                https://hashnode.com/@Pritesh16
-              </a>{" "}
-              , the username is "Pritesh16"
-            </small>
+
             <div
               className="mycenter"
               style={{
@@ -362,7 +367,7 @@ const ProfileLayout = () => {
         (Object.keys(userDetails)?.length !== 0 ? (
           <Profile data={userDetails?.data} />
         ) : (
-          <h1>Loading....</h1>
+          <Loader />
         ))}
     </div>
   );

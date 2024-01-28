@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SetPATContext } from "../../Layout";
 import FeedCard from "../FeedCard";
+import Loader from "../util/Loader";
 
 const Featured = ({ handleRead }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
@@ -89,11 +90,13 @@ const Featured = ({ handleRead }: any) => {
       }}
     >
       {" "}
-      {feedData?.data?.feed?.edges
-        ?.filter((item: any) => Boolean(item?.node?.coverImage))
-        .map((item: any) => (
-          <FeedCard item={item} handleRead={handleRead} />
-        ))}
+      {Object.keys(feedData)?.length !== 0 ? (
+        feedData?.data?.feed?.edges
+          ?.filter((item: any) => Boolean(item?.node?.coverImage))
+          .map((item: any) => <FeedCard item={item} handleRead={handleRead} />)
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

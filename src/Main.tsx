@@ -9,7 +9,6 @@ import {
 import FeedLayout from "./layouts/FeedLayout";
 import BookmarkLayout from "./layouts/BookmarkLayout";
 
-
 const Main = (): any => {
   const tab: any = useContext(TabContext);
   const logout: any = useContext(LogOutContext);
@@ -20,19 +19,10 @@ const Main = (): any => {
       setLogOut(true);
     }
   }, []);
-  const navTabs = [
-    "profile",
-    "feed",
-  ];
 
-
-
-  // if (!localStorage.getItem("sxs_key") && open) {
-  //   // console.log("nokey", localStorage.getItem("sxs_key"));
-  //   if (navTabs.includes(tab)) {
-  //     return <ProfileLayout />;
-  //   }
-  // }
+  if (logout && open) {
+    return <ProfileLayout />;
+  }
 
   if (tab === "profile") {
     return <ProfileLayout />;
@@ -46,12 +36,6 @@ const Main = (): any => {
   if (tab === "search") {
     return <FeedLayout />;
   }
-
-
-  // if (localStorage.getItem("sxs_key") !== "" && open) {
-  //   // console.log("key is", localStorage.getItem("sxs_key"));
-
-  // }
 };
 
 export default Main;
