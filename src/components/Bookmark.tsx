@@ -3,7 +3,7 @@ import { SetPATContext } from "../Layout";
 import FeedCard from "./FeedCard";
 import Loader from "./util/Loader";
 
-const Bookmark = ({ handleRead }: any) => {
+const Bookmark = ({ handleRead, handleShowProfile }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
@@ -93,7 +93,13 @@ const Bookmark = ({ handleRead }: any) => {
       {Object.keys(feedData)?.length !== 0 ? (
         feedData?.data?.feed?.edges
           ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => <FeedCard item={item} handleRead={handleRead} />)
+          .map((item: any) => (
+            <FeedCard
+              item={item}
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+            />
+          ))
       ) : (
         <Loader />
       )}

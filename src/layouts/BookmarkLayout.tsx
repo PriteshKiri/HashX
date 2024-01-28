@@ -1,69 +1,24 @@
-import { useContext, useState } from "react";
-import { gql } from "@apollo/client";
+import {  useState } from "react";
 import Blog from "../components/Blog";
-import { SetPATContext } from "../Layout";
-import Personalized from "../components/feeds/Personalized";
-import Following from "../components/feeds/Following";
-import Featured from "../components/feeds/Featured";
+
 import Bookmark from "../components/Bookmark";
+import FeedUserProfile from "../components/FeedUserProfile";
 
-// GraphQL query
-const GET_FEED = gql`
-  {
-    feed(first: 20, filter: { type: BOOKMARKS }) {
-      edges {
-        node {
-          title
-          url
-          id
-          brief
-          publishedAt
-          coverImage {
-            url
-          }
-          reactionCount
-          views
-          author {
-            name
-            profilePicture
-            username
-          }
-        }
-      }
-    }
-  }
-`;
 
-// TypeScript types for the query (Assuming structure, adjust as necessary)
-interface UserQueryData {
-  feed: {
-    edges: Array<{
-      node: {
-        title: string;
-        url: string;
-        id: string;
-        brief: string;
-        publishedAt: string;
-        coverImage: { url: string };
-        reactionCount: number;
-        views: number;
-        author: {
-          name: string;
-          profilePicture: string;
-          username: string;
-        };
-      };
-    }>;
-  };
-}
 
 const BookmarkLayout = () => {
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");
+  const [showFeedUserProfile, setShowFeedUserProfile] = useState(false);
+  const [feedUsername, setFeedUsername] = useState("");
 
   const handleRead = (id: string) => {
     setBlogId(id);
     setShowBlog(true);
+  };
+  const handleShowProfile = (username: string) => {
+    setFeedUsername(username);
+    setShowFeedUserProfile(true);
   };
 
   if (showBlog) {
@@ -72,7 +27,15 @@ const BookmarkLayout = () => {
         <Blog setShowBlog={setShowBlog} id={blogId} />
       </div>
     );
-  } else {
+  } else if (showFeedUserProfile) {
+    return (
+      <FeedUserProfile
+        username={feedUsername}
+        setShowFeedUserProfile={setShowFeedUserProfile}
+      />
+    );
+  }
+   else {
     return (
       <div
         style={{
@@ -91,7 +54,7 @@ const BookmarkLayout = () => {
         >
           <p style={{ fontWeight: "600", margin: "0px" }}>Bookmarks</p>
         </div>
-        <Bookmark handleRead={handleRead} />
+        <Bookmark handleRead={handleRead} handleShowProfile={handleShowProfile}  />
       </div>
     );
   }
