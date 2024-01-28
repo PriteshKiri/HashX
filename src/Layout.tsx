@@ -59,6 +59,7 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-arrow-left "
               style={{
                 height: "20px",
+                transform: "rotate(180deg)",
                 transition: "all",
               }}
               width="22"
@@ -81,7 +82,6 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-arrow-left "
               style={{
                 height: "20px",
-                transform: "rotate(180deg)",
                 transition: "all",
               }}
               width="22"

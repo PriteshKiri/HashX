@@ -88,6 +88,7 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
         padding: "15px",
         gap: 15,
       }}
+      className="gradient-bg-profile"
     >
       {" "}
       {Object.keys(feedData)?.length !== 0 ? (

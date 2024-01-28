@@ -8,6 +8,8 @@ import {
 import Loader from "../components/util/Loader";
 import Profile from "../components/Profile";
 import Blog from "../components/Blog";
+import { useSnackbar } from "../util";
+import SnackBar from "../components/util/SnackBar";
 
 declare global {
   interface Window {
@@ -26,6 +28,7 @@ const ProfileLayout = () => {
   const [fetchMode, setFetchMode] = useState(false);
   const [blogId, setBlogId] = useState("");
   const [checkCredentials, setCheckCredentials] = useState(false);
+  const { snackbar, showSnackbar }: any = useSnackbar();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -163,6 +166,7 @@ const ProfileLayout = () => {
               setLogOut(true);
               setFetchMode(false);
               setCheckCredentials(false);
+              showSnackbar(`Incorrect Personal Access Token!`, 3, "error");
             } else {
               setLogOut(false);
               setUserDetails(response);
@@ -210,6 +214,13 @@ const ProfileLayout = () => {
             style={{ flexDirection: "column", height: "90vh" }}
             className="mycenter gradient-bg"
           >
+            {snackbar && (
+              <SnackBar
+                message={snackbar.message}
+                time={snackbar.duration}
+                type={snackbar.type}
+              />
+            )}
             <div
               style={{
                 height: "120px",
@@ -296,8 +307,9 @@ const ProfileLayout = () => {
                     </button>
                     <button
                       type="submit"
-                      className="hx-button"
                       onClick={(e) => handleSubmit(e)}
+                      className={pat.trim() ? "hx-button" : "hx-button-disable"}
+                      disabled={pat.trim() ? false : true}
                     >
                       Submit
                     </button>

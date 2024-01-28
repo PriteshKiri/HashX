@@ -1,8 +1,12 @@
 import React from "react";
 import SocialMediaLinks from "./SocialMediaLinks";
 import ProfileBlogCard from "./ProfileBlogCard";
+import { formatFollowersNumber, useSnackbar } from "../util";
+import SnackBar from "./util/SnackBar";
 
 const Profile = ({ data, handleRead }: any) => {
+  const { snackbar, showSnackbar }: any = useSnackbar();
+
   return (
     <div
       style={{
@@ -14,6 +18,13 @@ const Profile = ({ data, handleRead }: any) => {
       }}
       className="gradient-bg-profile"
     >
+      {snackbar && (
+        <SnackBar
+          message={snackbar.message}
+          time={snackbar.duration}
+          type={snackbar.type}
+        />
+      )}
       <div>
         <div
           style={{
@@ -38,7 +49,7 @@ const Profile = ({ data, handleRead }: any) => {
       >
         {data?.me?.name}
       </h1>
-      <p className="hx-p" style={{ textAlign: "center" }}>
+      <p className="hx-p" style={{ textAlign: "center", color: "#808080" }}>
         {data?.me?.tagline}
       </p>
       <div
@@ -50,12 +61,16 @@ const Profile = ({ data, handleRead }: any) => {
         }}
       >
         <p style={{ fontSize: "14px" }}>
-          <span style={{ fontWeight: 600 }}>{data?.me?.followersCount}</span>{" "}
-          {data?.me?.followersCount ? "Followers" : "loading..."}
+          <span style={{ fontWeight: 600 }}>
+            {formatFollowersNumber(data?.me?.followersCount)}
+          </span>{" "}
+          Followers
         </p>
         <p style={{ fontSize: "14px" }}>
-          <span style={{ fontWeight: 600 }}>{data?.me?.followingsCount}</span>{" "}
-          {data?.me?.followingsCount && "Following"}
+          <span style={{ fontWeight: 600 }}>
+            {formatFollowersNumber(data?.me?.followingsCount)}
+          </span>{" "}
+          Following
         </p>
       </div>
       <SocialMediaLinks
@@ -79,28 +94,52 @@ const Profile = ({ data, handleRead }: any) => {
       >
         {Boolean(data?.me?.posts?.edges?.length) &&
           data?.me?.posts?.edges?.map((post: any) => {
-            return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            return (
+              <ProfileBlogCard
+                item={post}
+                handleRead={handleRead}
+                showSnackbar={showSnackbar}
+              />
+            );
           })}
 
         {Boolean(data?.me?.publications?.edges.length) &&
           data?.me?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
 
         {Boolean(data?.me?.publications?.edges.length) &&
           data?.me?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[0]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
 
         {Boolean(data?.me?.publications?.edges.length) &&
           data?.me?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[1]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
       </div>
     </div>

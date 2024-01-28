@@ -52,7 +52,7 @@ const FeedLayout = () => {
               justifyContent: "space-around",
               padding: "15px",
             }}
-            className="bdr-b"
+            className="bdr-b gradient-bg-feeds-header"
           >
             <div
               className={
@@ -136,9 +136,15 @@ const FeedLayout = () => {
               handleShowProfile={handleShowProfile}
             />
           ) : tabType === "following" ? (
-            <Following handleRead={handleRead} handleShowProfile={handleShowProfile} />
+            <Following
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+            />
           ) : (
-            <Featured handleRead={handleRead} handleShowProfile={handleShowProfile} />
+            <Featured
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+            />
           )}
         </div>
       )

@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { SetPATContext } from "../../Layout";
 import FeedCard from "../FeedCard";
 import Loader from "../util/Loader";
+import { useSnackbar } from "../../util";
+import SnackBar from "../util/SnackBar";
 
-const Personalized = ({ handleRead,handleShowProfile }: any) => {
+const Personalized = ({ handleRead, handleShowProfile }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
   const [feedData, setFeedData]: any = useState({});
+  const { snackbar, showSnackbar }: any = useSnackbar();
+
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
       console.log(username, "usererrfet");
@@ -89,11 +93,24 @@ const Personalized = ({ handleRead,handleShowProfile }: any) => {
         gap: 15,
       }}
     >
-      {" "}
+      {snackbar && (
+        <SnackBar
+          message={snackbar.message}
+          time={snackbar.duration}
+          type={snackbar.type}
+        />
+      )}{" "}
       {Object.keys(feedData)?.length !== 0 ? (
         feedData?.data?.feed?.edges
           ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => <FeedCard item={item} handleRead={handleRead} handleShowProfile={handleShowProfile} />)
+          .map((item: any) => (
+            <FeedCard
+              item={item}
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+              showSnackbar={showSnackbar}
+            />
+          ))
       ) : (
         <Loader />
       )}

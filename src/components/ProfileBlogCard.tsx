@@ -1,7 +1,11 @@
 import React from "react";
-import { formatDate } from "../util";
+import { copyToClipboard, formatDate } from "../util";
 
-const ProfileBlogCard = ({ item, handleRead }: any) => {
+const ProfileBlogCard = ({ item, handleRead,showSnackbar }: any) => {
+  function handleCopyBlogLink() {
+    copyToClipboard(item?.node?.url);
+    showSnackbar("Blog link copied to clipboard!", 3, "clipboard");
+  }
   return (
     <div
       className="bdr-all"
@@ -94,8 +98,13 @@ const ProfileBlogCard = ({ item, handleRead }: any) => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-heart"
-              width="18"
-              height="18"
+              style={{
+                background: "#ff191938",
+                borderRadius: "50%",
+                padding: "3px",
+              }}
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#ff4500"
@@ -119,8 +128,13 @@ const ProfileBlogCard = ({ item, handleRead }: any) => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-eye"
-              width="18"
-              height="18"
+              style={{
+                background: "#00abfb47",
+                borderRadius: "50%",
+                padding: "3px",
+              }}
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#00abfb"
@@ -132,7 +146,37 @@ const ProfileBlogCard = ({ item, handleRead }: any) => {
               <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
               <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
             </svg>
-            <small>{item?.node?.reactionCount}</small>
+            <small>{item?.node?.views}</small>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor:"pointer"
+            }}
+            onClick={handleCopyBlogLink}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-share-3"
+              style={{
+                background: "#730dff63",
+                borderRadius: "50%",
+                padding: "3px",
+              }}
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#a564ff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" />
+            </svg>
           </div>
         </div>
         <div

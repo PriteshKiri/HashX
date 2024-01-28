@@ -1,8 +1,12 @@
 import React from "react";
 import SocialMediaLinks from "./SocialMediaLinks";
 import ProfileBlogCard from "./ProfileBlogCard";
+import { formatFollowersNumber, useSnackbar } from "../util";
+import SnackBar from "./util/SnackBar";
 
 const SearchProfile = ({ data, handleRead }: any) => {
+  const { snackbar, showSnackbar }: any = useSnackbar();
+
   return (
     <div
       style={{
@@ -14,6 +18,14 @@ const SearchProfile = ({ data, handleRead }: any) => {
       }}
       className="gradient-bg-profile"
     >
+      {snackbar && (
+        <SnackBar
+          message={snackbar.message}
+          time={snackbar.duration}
+          type={snackbar.type}
+        />
+      )}
+
       <div>
         <div
           style={{
@@ -37,7 +49,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
       >
         {data?.user?.name}
       </h1>
-      <p className="hx-p" style={{ textAlign: "center" }}>
+      <p className="hx-p" style={{ textAlign: "center", color: "#808080" }}>
         {data?.user?.tagline}
       </p>
       <div
@@ -50,13 +62,13 @@ const SearchProfile = ({ data, handleRead }: any) => {
       >
         <p>
           <span style={{ fontWeight: 600 }}>
-            {data?.user?.followersCount || 0}
+            {formatFollowersNumber(data?.user?.followersCount || 0)}
           </span>{" "}
           Followers
         </p>
         <p>
           <span style={{ fontWeight: 600 }}>
-            {data?.user?.followingsCount || 0}
+            {formatFollowersNumber(data?.user?.followingsCount || 0)}
           </span>{" "}
           Following
         </p>
@@ -82,27 +94,27 @@ const SearchProfile = ({ data, handleRead }: any) => {
       >
         {Boolean(data?.user?.posts?.edges?.length) &&
           data?.user?.posts?.edges?.map((post: any) => {
-            return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar}/>;
           })}
 
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
             })}
 
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[0]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
             })}
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[1]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
             })}
       </div>
     </div>

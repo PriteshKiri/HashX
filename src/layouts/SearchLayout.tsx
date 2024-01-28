@@ -7,6 +7,8 @@ import {
 import Profile from "../components/Profile";
 import SearchProfile from "../components/SearchProfile";
 import Blog from "../components/Blog";
+import { useSnackbar } from "../util";
+import SnackBar from "../components/util/SnackBar";
 
 declare global {
   interface Window {
@@ -23,6 +25,8 @@ const SearchLayout = () => {
   const [blogId, setBlogId] = useState("");
   const open: any = useContext(SideBarStatusContext);
   const [checkCredentials, setCheckCredentials] = useState(false);
+  const { snackbar, showSnackbar }: any = useSnackbar();
+
   const handleRead = (id: string) => {
     setBlogId(id);
     setShowBlog(true);
@@ -127,10 +131,21 @@ const SearchLayout = () => {
               setLogOut(true);
               setFetchMode(false);
               setCheckCredentials(false);
+              showSnackbar(
+                ` ${
+                  response?.errors[0]?.message
+                    ? "Error : " + response?.errors[0]?.message
+                    : "Something went wrong!"
+                }`,
+                3,
+                "error"
+              );
             } else {
               setLogOut(false);
               if (response.data.user) {
                 setUserDetails(response);
+              } else {
+                showSnackbar(`User not found`, 3, "error");
               }
               setCheckCredentials(false);
             }
@@ -219,7 +234,7 @@ const SearchLayout = () => {
                 </div>
 
                 <a
-                  href={userDetails?.data?.post?.url}
+                  href={`https://hashnode.com/@${username}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -249,6 +264,13 @@ const SearchLayout = () => {
               style={{ flexDirection: "column", height: "90vh" }}
               className="mycenter gradient-bg"
             >
+              {snackbar && (
+                <SnackBar
+                  message={snackbar.message}
+                  time={snackbar.duration}
+                  type={snackbar.type}
+                />
+              )}
               <img
                 style={{
                   height: "200px",
@@ -269,6 +291,7 @@ const SearchLayout = () => {
                   width: "85%",
                   marginTop: "20px",
                   color: "#b7b7b7",
+                  lineHeight: "16px",
                 }}
               >
                 Username is unique and tied with user's profile URL. Example{" "}
@@ -322,8 +345,11 @@ const SearchLayout = () => {
                       </button>
                       <button
                         type="submit"
-                        className="hx-button"
                         onClick={(e) => handleSubmit(e)}
+                        className={
+                          username.trim() ? "hx-button" : "hx-button-disable"
+                        }
+                        disabled={username.trim() ? false : true}
                       >
                         Submit
                       </button>

@@ -157,6 +157,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               borderRadius: "8px",
               backgroundImage: `url(${data?.post?.coverImage?.url})`,
               backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           ></div>
         </div>

@@ -19,6 +19,15 @@
     rgb(51 35 86) 100%
   );
 }
+
+.gradient-bg-feeds-header {
+  background: linear-gradient(
+    115deg,
+    rgb(23 3 69) 0%,
+    rgba(0, 0, 0, 1) 51%,
+    rgb(35 19 67) 100%
+  );
+}
 .hx-layout {
   display: flex;
   z-index: 999999;
@@ -93,15 +102,18 @@
 }
 
 .hx-button:hover {
-  background: #67a0ff;
+  background: #0349b1;
 }
 
 .hx-button-disable {
-  background: #67a0ff;
+  background: #0349b1;
   color: white;
   border-radius: 25px;
   width: fit-content;
   padding: 10px 20px;
+  border: none;
+  font-size: 14px;
+  cursor: not-allowed;
 }
 
 .hx-h1 {
@@ -330,7 +342,7 @@
 }
 
 .feeds-tab:hover {
-  background-color: #0f172a;
+  background-color: #17233f;
 }
 
 .feeds-tab-active {
@@ -342,5 +354,5 @@
   gap: 3px;
   border-radius: 30px;
   padding: 10px;
-  background-color: #0f172a;
+  background-color: #17233f;
 }
