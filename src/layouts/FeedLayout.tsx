@@ -1,81 +1,21 @@
 import { useContext, useState } from "react";
-import {  gql } from "@apollo/client";
 import Blog from "../components/Blog";
 import {  SetPATContext } from "../Layout";
 import Personalized from "../components/feeds/Personalized";
 import Following from "../components/feeds/Following";
 import Featured from "../components/feeds/Featured";
 
-// GraphQL query
-const GET_FEED = gql`
-  {
-    feed(first: 20, filter: { type: BOOKMARKS }) {
-      edges {
-        node {
-          title
-          url
-          id
-          brief
-          publishedAt
-          coverImage {
-            url
-          }
-          reactionCount
-          views
-          author {
-            name
-            profilePicture
-            username
-          }
-        }
-      }
-    }
-  }
-`;
-
-// TypeScript types for the query (Assuming structure, adjust as necessary)
-interface UserQueryData {
-  feed: {
-    edges: Array<{
-      node: {
-        title: string;
-        url: string;
-        id: string;
-        brief: string;
-        publishedAt: string;
-        coverImage: { url: string };
-        reactionCount: number;
-        views: number;
-        author: {
-          name: string;
-          profilePicture: string;
-          username: string;
-        };
-      };
-    }>;
-  };
-}
 
 const FeedLayout = () => {
-  const setGlobalPAT: any = useContext(SetPATContext);
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");
-  const [fetchMode, setFetchMode] = useState(false);
-  const [pat, setPAT]: any = useState("");
-  const [feedData, setFeedData]: any = useState({});
   const [tabType, setTabType] = useState("personalized");
-  // Fetch data when the component mounts (or based on specific events)
-
-
-
-
 
   const handleRead = (id: string) => {
     setBlogId(id);
     setShowBlog(true);
   };
 
-  // Render your data or handle the empty state
   if (showBlog) {
     return (
       <div>

@@ -1,122 +1,11 @@
-import { useContext, useEffect, useState, useRef, FormEvent } from "react";
+import { useContext, useEffect, useState, FormEvent } from "react";
 import { LogOutContext, SetLogOutContext, SetPATContext } from "../Layout";
 import Loader from "../components/util/Loader";
-import { copyToClipboard, useSnackbar } from "../util";
-import SnackBar from "../components/util/SnackBar";
-import { useQuery, gql, useLazyQuery } from "@apollo/client";
-import SocialMediaLinks from "../components/SocialMediaLinks";
 import Profile from "../components/Profile";
+import Blog from "../components/Blog";
 
-const GET_USER = gql`
-  {
-    me {
-      location
-      profilePicture
-      name
-      followersCount
-      followingsCount
-      bio {
-        text
-      }
-      tagline
-      socialMediaLinks {
-        website
-        github
-        twitter
-        instagram
-        facebook
-        stackoverflow
-        linkedin
-        youtube
-      }
-      publications(first: 10) {
-        edges {
-          node {
-            title
-            posts(first: 10) {
-              edges {
-                node {
-                  title
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-      posts(pageSize: 10, page: 10) {
-        edges {
-          node {
-            title
-            url
-          }
-        }
-        nodes {
-          title
-        }
-      }
-    }
-  }
-`;
 
-interface Post {
-  title: string;
-  url: string;
-}
 
-interface PostEdge {
-  node: Post;
-}
-
-interface Posts {
-  edges: PostEdge[];
-}
-
-interface Publication {
-  title: string;
-  posts: Posts;
-}
-
-interface PublicationEdge {
-  node: Publication;
-}
-
-interface UserData {
-  location: string;
-  profilePicture: string;
-  name: string;
-  tagline: string;
-  followersCount: number;
-  followingsCount: number;
-  bio: { text: string };
-  socialMediaLinks: SocialMediaLinksProps;
-  badges: Array<{ id: string; name: string }>;
-  publications: {
-    edges: PublicationEdge[];
-  };
-  posts: {
-    edges: Array<{
-      node: {
-        title: string;
-        url: string;
-      };
-    }>;
-  };
-}
-
-interface UserQueryData {
-  me: UserData;
-}
-interface SocialMediaLinksProps {
-  website?: string;
-  github?: string;
-  twitter?: string;
-  instagram?: string;
-  facebook?: string;
-  stackoverflow?: string;
-  linkedin?: string;
-  youtube?: string;
-}
 
 declare global {
   interface Window {
@@ -130,8 +19,9 @@ const ProfileLayout = () => {
   const setGlobalPAT: any = useContext(SetPATContext);
   const [userDetails, setUserDetails]: any = useState({});
   const [pat, setPAT]: any = useState("");
-
+  const [showBlog, setShowBlog] = useState(false);
   const [fetchMode, setFetchMode] = useState(false);
+  const [blogId, setBlogId] = useState("");
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -172,6 +62,11 @@ const ProfileLayout = () => {
       }
     });
   }, [logout]);
+
+  const handleRead = (id: string) => {
+    setBlogId(id);
+    setShowBlog(true);
+  };
 
   useEffect(() => {
     if (fetchMode) {
@@ -276,7 +171,13 @@ const ProfileLayout = () => {
       }
     }
   }, [fetchMode]);
-
+  if (showBlog) {
+    return (
+      <div>
+        <Blog setShowBlog={setShowBlog} id={blogId} />
+      </div>
+    );
+  } else {
   return (
     <div
       style={{
@@ -382,12 +283,13 @@ const ProfileLayout = () => {
       )}
       {!logout &&
         (Object.keys(userDetails)?.length !== 0 ? (
-          <Profile data={userDetails?.data} />
+          <Profile data={userDetails?.data} handleRead={handleRead} />
         ) : (
           <Loader />
         ))}
     </div>
   );
+}
 };
 
 export default ProfileLayout;
