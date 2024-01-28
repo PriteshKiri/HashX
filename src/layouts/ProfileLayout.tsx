@@ -135,7 +135,6 @@ const ProfileLayout = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-
     setGlobalPAT(pat);
     if (pat) {
       console.log(pat, "new user name");
@@ -207,6 +206,15 @@ const ProfileLayout = () => {
                     node {
                       title
                       url
+                      id
+                      brief
+                      publishedAt
+                      coverImage {
+                        url
+                      }
+                      reactionCount
+                      views
+                      readTimeInMinutes
                     }
                   }
                 }
@@ -218,6 +226,15 @@ const ProfileLayout = () => {
               node {
                 title
                 url
+                id
+                brief
+                publishedAt
+                coverImage {
+                  url
+                }
+                reactionCount
+                views
+                readTimeInMinutes
               }
             }
             nodes {

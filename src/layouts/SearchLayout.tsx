@@ -57,6 +57,15 @@ const SearchLayout = () => {
                     node {
                       title
                       url
+                      id
+                      brief
+                      publishedAt
+                      coverImage {
+                        url
+                      }
+                      reactionCount
+                      views
+                      readTimeInMinutes
                     }
                   }
                 }
@@ -68,6 +77,15 @@ const SearchLayout = () => {
               node {
                 title
                 url
+                id
+                brief
+                publishedAt
+                coverImage {
+                  url
+                }
+                reactionCount
+                views
+                readTimeInMinutes
               }
             }
             nodes {
