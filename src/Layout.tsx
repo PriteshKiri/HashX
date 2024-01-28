@@ -203,6 +203,76 @@ const Layout = ({ children }: any) => {
             </svg>
           </div>
         </Tooltip>
+        <Tooltip content="Bookmarks">
+          {/* Feed */}
+          <div
+            style={{
+              padding: "4px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+            className={`mycenter bdr-all ${
+              tab === "bookmark" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
+            } `}
+            onClick={() => setTab("bookmark")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-bookmarks"
+              style={{
+                height: "20px",
+              }}
+              width="22"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M15 10v11l-5 -3l-5 3v-11a3 3 0 0 1 3 -3h4a3 3 0 0 1 3 3z" />
+              <path d="M11 3h5a3 3 0 0 1 3 3v11" />
+            </svg>
+          </div>
+        </Tooltip>
+        <Tooltip content="Search user">
+          {/* Feed */}
+          <div
+            style={{
+              padding: "4px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+            className={`mycenter bdr-all ${
+              tab === "search" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
+            } `}
+            onClick={() => setTab("search")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-user-search"
+              style={{
+                height: "20px",
+              }}
+              width="22"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5" />
+              <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+              <path d="M20.2 20.2l1.8 1.8" />
+            </svg>
+          </div>
+        </Tooltip>
       </nav>
       <div
         className={"bdr-l"}

@@ -4,6 +4,7 @@ import Loader from "../components/util/Loader";
 import { copyToClipboard, formatDate, useSnackbar } from "../util";
 import SnackBar from "../components/util/SnackBar";
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
+import { relative } from "path";
 
 const GET_BLOG = gql`
   query GetBlog($id: ID!) {
@@ -71,9 +72,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        overflowY: "scroll",
-        height: "85vh",
-        padding: "20px",
         gap: 5,
       }}
     >
@@ -82,7 +80,12 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          position: "sticky",
+          padding: 20,
+          background: "black",
+          top: 0,
         }}
+        className="bdr-b bdr-l"
       >
         <div
           style={{
@@ -135,68 +138,80 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
         </a>
       </div>
 
-      <div style={{ margin: "15px 0px" }}>
-        <div
-          style={{
-            height: "185px",
-            width: "100%",
-            borderRadius: "8px",
-            backgroundImage: `url(${data?.post?.coverImage?.url})`,
-            backgroundSize: "cover",
-          }}
-        ></div>
-      </div>
-
-      <div>
-        <h1 style={{ textAlign: "center", fontSize: 20, fontWeight: 600 }}>
-          {data?.post?.title}
-        </h1>
-        <h2
-          style={{
-            textAlign: "center",
-            fontSize: 116,
-            fontWeight: 500,
-            color: "#9b9b9b",
-          }}
-        >
-          {data?.post?.subtitle}
-        </h2>
-      </div>
-
       <div
         style={{
+          padding: "20px",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "column",
           gap: 5,
-          marginBottom: "15px",
+          overflowY: "scroll",
+          height: "77vh",
+          position: "relative",
         }}
       >
+        <div style={{ margin: "15px 0px" }}>
+          <div
+            style={{
+              height: "185px",
+              width: "100%",
+              borderRadius: "8px",
+              backgroundImage: `url(${data?.post?.coverImage?.url})`,
+              backgroundSize: "cover",
+            }}
+          ></div>
+        </div>
+
+        <div>
+          <h1 style={{ textAlign: "center", fontSize: 20, fontWeight: 600 }}>
+            {data?.post?.title}
+          </h1>
+          <h2
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              fontWeight: 500,
+              color: "#9b9b9b",
+            }}
+          >
+            {data?.post?.subtitle}
+          </h2>
+        </div>
+
         <div
           style={{
-            height: "35px",
-            width: "35px",
-            borderRadius: "50%",
-            backgroundImage: `url(${data?.post?.author?.profilePicture})`,
-            backgroundSize: "cover",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 5,
+            marginBottom: "15px",
           }}
-        ></div>
-        <p style={{ margin: "0px", fontSize: "12px", fontWeight: "600" }}>
-          {data?.post?.author?.name} ·{" "}
-          <span style={{ fontWeight: 400 }}>
-            {formatDate(data?.post?.publishedAt ?? "")}
-          </span>{" "}
-          ·{" "}
-          <span style={{ fontWeight: 400 }}>
-            {data?.post?.readTimeInMinutes} minutes
-          </span>
-        </p>
-      </div>
+        >
+          <div
+            style={{
+              height: "35px",
+              width: "35px",
+              borderRadius: "50%",
+              backgroundImage: `url(${data?.post?.author?.profilePicture})`,
+              backgroundSize: "cover",
+            }}
+          ></div>
+          <p style={{ margin: "0px", fontSize: "12px", fontWeight: "600" }}>
+            {data?.post?.author?.name} ·{" "}
+            <span style={{ fontWeight: 400 }}>
+              {formatDate(data?.post?.publishedAt ?? "")}
+            </span>{" "}
+            ·{" "}
+            <span style={{ fontWeight: 400 }}>
+              {data?.post?.readTimeInMinutes} minutes
+            </span>
+          </p>
+        </div>
 
-      <div
-        className="post-details"
-        dangerouslySetInnerHTML={{ __html: data?.post?.content?.html || "" }}
-      />
+        <div
+          className="post-details"
+          dangerouslySetInnerHTML={{ __html: data?.post?.content?.html || "" }}
+        />
+      </div>
     </div>
   );
 };

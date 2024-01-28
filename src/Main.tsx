@@ -7,6 +7,7 @@ import {
   TabContext,
 } from "./Layout";
 import FeedLayout from "./layouts/FeedLayout";
+import BookmarkLayout from "./layouts/BookmarkLayout";
 
 
 const Main = (): any => {
@@ -37,6 +38,12 @@ const Main = (): any => {
     return <ProfileLayout />;
   }
   if (tab === "feed") {
+    return <FeedLayout />;
+  }
+  if (tab === "bookmark") {
+    return <BookmarkLayout />;
+  }
+  if (tab === "search") {
     return <FeedLayout />;
   }
 

@@ -268,8 +268,23 @@ const ProfileLayout = () => {
         overflowY: "scroll",
         height: "85vh",
         padding: "20px",
+        paddingTop: 0,
       }}
     >
+      {" "}
+      {!logout && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "15px",
+          }}
+          className="bdr-b"
+        >
+          <p style={{ fontWeight: "600", margin: "0px" }}>Profile</p>
+        </div>
+      )}
       {logout && (
         <div style={{ flexDirection: "column" }} className="mycenter">
           <div
@@ -343,7 +358,6 @@ const ProfileLayout = () => {
           </div>
         </div>
       )}
-
       {!logout &&
         (Object.keys(userDetails)?.length !== 0 ? (
           <Profile data={userDetails?.data} />
