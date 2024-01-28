@@ -39,41 +39,10 @@ const Layout = ({ children }: any) => {
     });
   }, []);
   return (
-    <div
-      style={{
-        fontFamily: "sans-serif", 
-        display: "flex",
-        zIndex: 9999999,
-        position: "fixed",
-        right: 0,
-        top: 0,
-        height: "100vh",
-      }}
-      className={`app`}
-    >
+    <div className={`app hx-layout `}>
       {snackbar && <SnackBar message={snackbar.message} type={snackbar.type} />}
 
-      <nav
-        style={{
-          position: "absolute",
-          paddingTop: "10px",
-          paddingBottom: "10px",
-          top: "50px",
-          left: "-50px", // Assuming '--left-[50px]' is a typo and should be 'left-50px'
-          width: "50px",
-          backgroundColor: "black",
-          height: "220px",
-          borderTopLeftRadius: "8px",
-          borderBottomLeftRadius: "8px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-around",
-          gap: "4px",
-          boxShadow: "-3px 5px 30px -3px black",
-        }}
-        className="bdr-all"
-      >
+      <nav className={`hx-nav bdr-all`}>
         {/* Sidebar opener arrow */}
         <div
           style={{
@@ -81,7 +50,7 @@ const Layout = ({ children }: any) => {
             borderRadius: "6px",
             cursor: "pointer",
           }}
-          className=" bdr-all mycenter "
+          className=" bdr-all mycenter"
           onClick={() => openSidebar()}
         >
           {open ? (
@@ -90,7 +59,6 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-arrow-left "
               style={{
                 height: "20px",
-                transform: "rotate(180deg)",
                 transition: "all",
               }}
               width="22"
@@ -212,7 +180,9 @@ const Layout = ({ children }: any) => {
               cursor: "pointer",
             }}
             className={`mycenter bdr-all ${
-              tab === "bookmark" ? "nav-btn-gradient " : "nav-btn-gradient-hover"
+              tab === "bookmark"
+                ? "nav-btn-gradient "
+                : "nav-btn-gradient-hover"
             } `}
             onClick={() => setTab("bookmark")}
           >

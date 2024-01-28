@@ -9,28 +9,28 @@ const SearchProfile = ({ data, handleRead }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "79vh",
+        height: "84vh",
         padding: "20px",
       }}
     >
-      <div
-        style={{
-          height: "120px",
-          width: "120px",
-          margin: "auto",
-          borderRadius: "50%",
-          backgroundImage: `url(${data?.user?.profilePicture})`,
-          backgroundSize: "cover",
-          marginTop: "15px",
-          padding: "100px 40px",
-        }}
-      ></div>
+      <div>
+        <div
+          style={{
+            height: "120px",
+            width: "120px",
+            margin: "auto",
+            borderRadius: "50%",
+            backgroundImage: `url(${data?.user?.profilePicture})`,
+            backgroundSize: "cover",
+            marginTop: "15px",
+            aspectRatio: "1/1",
+          }}
+        ></div>
+      </div>
       <h1
         style={{
           color: "white",
-          margin: "auto",
-          textAlign: "center",
-          marginTop: "15px",
+          margin: "20px auto 0px",
         }}
         className="hx-h1"
       >
@@ -39,14 +39,25 @@ const SearchProfile = ({ data, handleRead }: any) => {
       <p className="hx-p" style={{ textAlign: "center" }}>
         {data?.user?.tagline}
       </p>
-      <div style={{ display: "flex", gap: 25, justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: 25,
+          justifyContent: "center",
+          marginTop: "10px",
+        }}
+      >
         <p>
-          <span style={{ fontWeight: 600 }}>{data?.user?.followersCount}</span>{" "}
-          {data?.user?.followersCount ? "Followers" : "loading..."}
+          <span style={{ fontWeight: 600 }}>
+            {data?.user?.followersCount || 0}
+          </span>{" "}
+          Followers
         </p>
         <p>
-          <span style={{ fontWeight: 600 }}>{data?.user?.followingsCount}</span>{" "}
-          {data?.user?.followingsCount && "Following"}
+          <span style={{ fontWeight: 600 }}>
+            {data?.user?.followingsCount || 0}
+          </span>{" "}
+          Following
         </p>
       </div>
       <SocialMediaLinks
@@ -65,28 +76,34 @@ const SearchProfile = ({ data, handleRead }: any) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
+          marginBottom: "40px",
         }}
       >
         {Boolean(data?.user?.posts?.edges?.length) &&
           data?.user?.posts?.edges?.map((post: any) => {
             return <ProfileBlogCard item={post} handleRead={handleRead} />;
           })}
-      </div>
 
-      <div
-        style={{
-          marginTop: "10px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
             })}
+
+        {Boolean(data?.user?.publications?.edges.length) &&
+          data?.user?.publications?.edges[0]?.node.posts.edges.map(
+            (post: any) => {
+              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            }
+          )}
+
+        {Boolean(data?.user?.publications?.edges.length) &&
+          data?.user?.publications?.edges[1]?.node.posts.edges.map(
+            (post: any) => {
+              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            }
+          )}
       </div>
     </div>
   );

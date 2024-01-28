@@ -3,6 +3,36 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
+
+.hx-layout {
+  display: flex;
+  z-index: 999999;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.hx-nav {
+  position: absolute;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  top: 50px;
+  width: 50px;
+  background-color: black;
+  left: -50px;
+  height: 220px;
+  display: flex !important;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  box-shadow: black -3px 5px 30px -3px;
+}
+
+
 .hx-input {
   color: white;
   background: #1e293b;
@@ -44,7 +74,7 @@
   width: fit-content;
   padding: 10px 20px;
   border: none;
-  font-size: 14px;  
+  font-size: 14px;
   cursor: pointer;
 }
 

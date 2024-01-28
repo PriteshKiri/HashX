@@ -4,11 +4,14 @@ import { SetPATContext, SideBarStatusContext } from "../Layout";
 import Personalized from "../components/feeds/Personalized";
 import Following from "../components/feeds/Following";
 import Featured from "../components/feeds/Featured";
+import FeedUserProfile from "../components/FeedUserProfile";
 
 const FeedLayout = () => {
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");
   const [tabType, setTabType] = useState("personalized");
+  const [showFeedUserProfile, setShowFeedUserProfile] = useState(false);
+  const [feedUsername, setFeedUsername] = useState("");
   const open: any = useContext(SideBarStatusContext);
 
   const handleRead = (id: string) => {
@@ -16,11 +19,23 @@ const FeedLayout = () => {
     setShowBlog(true);
   };
 
+  const handleShowProfile = (username: string) => {
+    setFeedUsername(username);
+    setShowFeedUserProfile(true);
+  };
+
   if (showBlog) {
     return (
       <div>
         <Blog setShowBlog={setShowBlog} id={blogId} />
       </div>
+    );
+  } else if (showFeedUserProfile) {
+    return (
+      <FeedUserProfile
+        username={feedUsername}
+        setShowFeedUserProfile={setShowFeedUserProfile}
+      />
     );
   } else {
     return (
@@ -116,11 +131,14 @@ const FeedLayout = () => {
             </div>
           </div>
           {tabType === "personalized" ? (
-            <Personalized handleRead={handleRead} />
+            <Personalized
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+            />
           ) : tabType === "following" ? (
-            <Following handleRead={handleRead} />
+            <Following handleRead={handleRead} handleShowProfile={handleShowProfile} />
           ) : (
-            <Featured handleRead={handleRead} />
+            <Featured handleRead={handleRead} handleShowProfile={handleShowProfile} />
           )}
         </div>
       )

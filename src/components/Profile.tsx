@@ -9,29 +9,29 @@ const Profile = ({ data, handleRead }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "79vh",
+        height: "84vh",
         padding: "20px",
       }}
     >
-      <div
-        style={{
-          height: "120px",
-          width: "120px",
-          margin: "auto",
-          borderRadius: "50%",
-          backgroundImage: `url(${data?.me?.profilePicture})`,
-          backgroundSize: "cover",
-          marginTop: "15px",
-          padding: "100px 40px",
-        }}
-      ></div>
+      <div>
+        <div
+          style={{
+            height: "120px",
+            width: "120px",
+            margin: "auto",
+            borderRadius: "50%",
+            backgroundImage: `url(${data?.me?.profilePicture})`,
+            backgroundSize: "cover",
+            marginTop: "15px",
+            aspectRatio: "1/1",
+          }}
+        ></div>
+      </div>
 
       <h1
         style={{
           color: "white",
-          margin: "auto",
-          textAlign: "center",
-          marginTop: "15px",
+          margin: "20px auto 0px",
         }}
         className="hx-h1"
       >
@@ -40,12 +40,19 @@ const Profile = ({ data, handleRead }: any) => {
       <p className="hx-p" style={{ textAlign: "center" }}>
         {data?.me?.tagline}
       </p>
-      <div style={{ display: "flex", gap: 25, justifyContent: "center" }}>
-        <p>
+      <div
+        style={{
+          display: "flex",
+          gap: 25,
+          justifyContent: "center",
+          marginTop: "10px",
+        }}
+      >
+        <p style={{ fontSize: "14px" }}>
           <span style={{ fontWeight: 600 }}>{data?.me?.followersCount}</span>{" "}
           {data?.me?.followersCount ? "Followers" : "loading..."}
         </p>
-        <p>
+        <p style={{ fontSize: "14px" }}>
           <span style={{ fontWeight: 600 }}>{data?.me?.followingsCount}</span>{" "}
           {data?.me?.followingsCount && "Following"}
         </p>
@@ -72,22 +79,27 @@ const Profile = ({ data, handleRead }: any) => {
           data?.me?.posts?.edges?.map((post: any) => {
             return <ProfileBlogCard item={post} handleRead={handleRead} />;
           })}
-      </div>
 
-      <div
-        style={{
-          marginTop: "10px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
         {Boolean(data?.me?.publications?.edges.length) &&
           data?.me?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
             })}
+
+        {Boolean(data?.me?.publications?.edges.length) &&
+          data?.me?.publications?.edges[0]?.node.posts.edges.map(
+            (post: any) => {
+              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            }
+          )}
+
+        {Boolean(data?.me?.publications?.edges.length) &&
+          data?.me?.publications?.edges[1]?.node.posts.edges.map(
+            (post: any) => {
+              return <ProfileBlogCard item={post} handleRead={handleRead} />;
+            }
+          )}
       </div>
     </div>
   );

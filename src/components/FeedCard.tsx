@@ -1,7 +1,7 @@
 import React from "react";
 import { formatDate } from "../util";
 
-const FeedCard = ({ item, handleRead }: any) => {
+const FeedCard = ({ item, handleRead, handleShowProfile }: any) => {
   return (
     <div
       className="bdr-all"
@@ -22,7 +22,7 @@ const FeedCard = ({ item, handleRead }: any) => {
           borderRadius: "8px",
           backgroundImage: `url(${item?.node?.coverImage?.url})`,
           backgroundSize: "cover",
-          backgroundPosition:"center"
+          backgroundPosition: "center",
         }}
       ></div>
 
@@ -64,14 +64,13 @@ const FeedCard = ({ item, handleRead }: any) => {
               gap: 2,
             }}
           >
-            <a
+            <p
               className=" hx-link-white"
-              style={{ margin: "0px", fontSize: "12px" }}
-              target="__blank"
-              href={`https://hashnode.com/@${item?.node?.author?.username}`}
+              style={{ margin: "0px", fontSize: "12px",cursor:"pointer" }}
+              onClick={() => handleShowProfile(item?.node?.author?.username)}
             >
               {item?.node?.author?.name}
-            </a>
+            </p>
             <small
               style={{
                 color: "rgb(148, 163, 184)",
