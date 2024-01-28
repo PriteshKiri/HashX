@@ -39,6 +39,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children }) => {
               borderRadius: "4px",
               boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
               backgroundColor: "rgba(255, 255, 255, 0.95)",
+              whiteSpace: "nowrap",
               fontSize: "12px",
               display: "block",
             }}
@@ -70,7 +71,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children }) => {
               color: "white",
               borderRadius: "4px",
               boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-
+              whiteSpace: "nowrap",
               fontSize: "12px",
             }}
             className="nav-btn-gradient"

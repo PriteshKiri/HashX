@@ -2,7 +2,7 @@ import React from "react";
 import SocialMediaLinks from "./SocialMediaLinks";
 import ProfileBlogCard from "./ProfileBlogCard";
 
-const SearchProfile = ({ data }: any) => {
+const SearchProfile = ({ data, handleRead }: any) => {
   return (
     <div
       style={{
@@ -69,7 +69,7 @@ const SearchProfile = ({ data }: any) => {
       >
         {Boolean(data?.user?.posts?.edges?.length) &&
           data?.user?.posts?.edges?.map((post: any) => {
-            return <ProfileBlogCard item={post} />;
+            return <ProfileBlogCard item={post} handleRead={handleRead} />;
           })}
       </div>
 
@@ -85,7 +85,7 @@ const SearchProfile = ({ data }: any) => {
           data?.user?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} />;
+              return <ProfileBlogCard item={post} handleRead={handleRead} />;
             })}
       </div>
     </div>

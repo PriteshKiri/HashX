@@ -4,14 +4,19 @@
 }
 
 .hx-input {
-  color: black;
-  background: #ffffff;
+  color: white;
+  background: #1e293b;
   padding: 10px 22px;
   border-radius: 25px;
-  border: 1px solid #b4a9fb;
+  border: 1px solid rgb(30 41 59 / 0.8);
   outline: none;
   width: 130%;
   cursor: pointer;
+}
+
+.hx-input::placeholder {
+  font-size: 12px;
+  color: #9ca3af;
 }
 
 .hx-link {
@@ -23,13 +28,24 @@
   color: #3b81f6;
 }
 
+.hx-link-white {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.hx-link-white:visited {
+  color: #ffffff;
+}
+
 .hx-button {
-  background: #3b81f6;
+  background-color: #0064ff;
   color: white;
   border-radius: 25px;
   width: fit-content;
   padding: 10px 20px;
   border: none;
+  font-size: 14px;  
+  cursor: pointer;
 }
 
 .hx-button:hover {
@@ -149,6 +165,7 @@
 }
 .post-details li {
   list-style: square;
+  font-size: 12px;
 }
 .post-details p {
   margin: 10px 0px;
@@ -156,9 +173,28 @@
   line-height: 18px;
 }
 
+.post-details p code {
+  color: #fe8d59;
+  background: #fe8d594d;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin: 0px 3px;
+}
+
 .post-details a {
   color: #3b81f6;
   text-decoration: underline;
+  word-wrap: break-word;
+  display: block;
+  width: 100%;
+}
+
+.post-details a {
+  color: #3b81f6;
+  text-decoration: underline;
+  word-wrap: break-word;
+  display: block;
+  width: 100%;
 }
 
 .post-details a:visited {
@@ -183,6 +219,59 @@
   background-color: #1e293b;
   overflow-x: auto;
   font-size: 12px;
+}
+
+.post-details pre .hljs-keyword {
+  color: #c586c0;
+}
+.post-details pre .hljs-string {
+  color: #ce9178;
+}
+.post-details pre .hljs-function {
+  color: #dcdcaa;
+  font-weight: bold;
+}
+.post-details pre .hljs-params {
+  color: inherit;
+}
+.post-details pre .hljs-built_in {
+  color: #9cdcfe;
+}
+.post-details pre .hljs-number {
+  color: #b5cea8;
+}
+.post-details pre .hljs-tag {
+  color: #569cd6;
+}
+.post-details pre .hljs-name {
+  color: #9cdcfe;
+}
+.post-details pre .hljs-attr {
+  color: #d7ba7d;
+}
+.post-details pre .xml .hljs-tag {
+  color: #569cd6;
+}
+
+.post-details pre .hljs-comment {
+  color: #469972;
+}
+
+.post-details table {
+  border: 1px solid rgb(30 41 59 / 0.8);
+}
+
+.post-details table td {
+  border: 1px solid rgb(30 41 59 / 0.8);
+  padding: 10px;
+  font-size: 12px;
+}
+
+.post-details blockquote {
+  border-left: 5px solid #354c6f;
+  padding-left: 12px;
+  margin: 20px 0px;
+  border-radius: 3px;
 }
 
 .feeds-tab {

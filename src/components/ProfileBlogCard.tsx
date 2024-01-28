@@ -22,6 +22,7 @@ const ProfileBlogCard = ({ item, handleRead }: any) => {
           borderRadius: "8px",
           backgroundImage: `url(${item?.node?.coverImage?.url})`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       ></div>
 
@@ -33,9 +34,9 @@ const ProfileBlogCard = ({ item, handleRead }: any) => {
           width: "100%",
           margin: "15px 0px",
           paddingBottom: "5px",
-          marginTop:"5px",
-          color:"#94a3b8",
-          fontStyle:"italic"
+          marginTop: "5px",
+          color: "#94a3b8",
+          fontStyle: "italic",
         }}
         className="bdr-b"
       >

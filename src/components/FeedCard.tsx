@@ -22,6 +22,7 @@ const FeedCard = ({ item, handleRead }: any) => {
           borderRadius: "8px",
           backgroundImage: `url(${item?.node?.coverImage?.url})`,
           backgroundSize: "cover",
+          backgroundPosition:"center"
         }}
       ></div>
 
@@ -63,9 +64,14 @@ const FeedCard = ({ item, handleRead }: any) => {
               gap: 2,
             }}
           >
-            <p className="hx-p" style={{ margin: "0px" }}>
+            <a
+              className=" hx-link-white"
+              style={{ margin: "0px", fontSize: "12px" }}
+              target="__blank"
+              href={`https://hashnode.com/@${item?.node?.author?.username}`}
+            >
               {item?.node?.author?.name}
-            </p>
+            </a>
             <small
               style={{
                 color: "rgb(148, 163, 184)",

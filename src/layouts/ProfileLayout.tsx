@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, FormEvent } from "react";
-import { LogOutContext, SetLogOutContext, SetPATContext } from "../Layout";
+import { LogOutContext, SetLogOutContext, SetPATContext, SideBarStatusContext } from "../Layout";
 import Loader from "../components/util/Loader";
 import Profile from "../components/Profile";
 import Blog from "../components/Blog";
@@ -16,6 +16,8 @@ declare global {
 const ProfileLayout = () => {
   const logout: any = useContext(LogOutContext);
   const setLogOut: any = useContext(SetLogOutContext);
+  const open: any = useContext(SideBarStatusContext);
+
   const setGlobalPAT: any = useContext(SetPATContext);
   const [userDetails, setUserDetails]: any = useState({});
   const [pat, setPAT]: any = useState("");
@@ -200,7 +202,7 @@ const ProfileLayout = () => {
           <p style={{ fontWeight: "600", margin: "0px" }}>Profile</p>
         </div>
       )}
-      {logout && (
+      {logout && open && (
         <div style={{ flexDirection: "column" }} className="mycenter">
           <div
             style={{
@@ -217,7 +219,7 @@ const ProfileLayout = () => {
             HashX
           </h1>
           <p
-            style={{ textAlign: "center", color: "#94a3b8", marginTop: "5px" }}
+            style={{ textAlign: "center", color: "#94a3b8", marginTop: "5px", fontSize:"14px" }}
           >
             World's first Hashnode eXtension
           </p>
@@ -269,7 +271,7 @@ const ProfileLayout = () => {
                 justifyContent: "space-between",
               }}
             >
-              <button className="hx-button">Clear</button>
+              <button className="hx-button" onClick={()=>setPAT("")}>Clear</button>
               <button
                 type="submit"
                 className="hx-button"

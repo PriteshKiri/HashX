@@ -65,7 +65,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
     getBlog({ variables: { id } });
   }, []);
   console.log(data);
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error : {error.message}</p>;
   return (
     <div
@@ -195,7 +195,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               backgroundSize: "cover",
             }}
           ></div>
-          <p style={{ margin: "0px", fontSize: "12px", fontWeight: "600" }}>
+          <p style={{ margin: "0px", fontSize: "11px", fontWeight: "600" }}>
             {data?.post?.author?.name} ·{" "}
             <span style={{ fontWeight: 400 }}>
               {formatDate(data?.post?.publishedAt ?? "")}
