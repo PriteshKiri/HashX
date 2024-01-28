@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState, FormEvent } from "react";
-import { LogOutContext, SetLogOutContext, SideBarStatusContext } from "../Layout";
+import {
+  LogOutContext,
+  SetLogOutContext,
+  SideBarStatusContext,
+} from "../Layout";
 import Profile from "../components/Profile";
 import SearchProfile from "../components/SearchProfile";
 import Blog from "../components/Blog";
@@ -18,7 +22,7 @@ const SearchLayout = () => {
   const [showBlog, setShowBlog] = useState(false);
   const [blogId, setBlogId] = useState("");
   const open: any = useContext(SideBarStatusContext);
-
+  const [checkCredentials, setCheckCredentials] = useState(false);
   const handleRead = (id: string) => {
     setBlogId(id);
     setShowBlog(true);
@@ -28,6 +32,7 @@ const SearchLayout = () => {
     event.preventDefault();
 
     if (username.trim()) {
+      setCheckCredentials(true);
       setFetchMode(true);
     }
   };
@@ -121,9 +126,13 @@ const SearchLayout = () => {
             if (response?.errors?.length) {
               setLogOut(true);
               setFetchMode(false);
+              setCheckCredentials(false);
             } else {
               setLogOut(false);
-              setUserDetails(response);
+              if (response.data.user) {
+                setUserDetails(response);
+              }
+              setCheckCredentials(false);
             }
           })
           .catch((err) => console.error(err));
@@ -236,12 +245,15 @@ const SearchLayout = () => {
             )}
           </div>
           {Object.keys(userDetails)?.length === 0 ? (
-            <div style={{ flexDirection: "column" }} className="mycenter">
+            <div
+              style={{ flexDirection: "column", height: "90vh" }}
+              className="mycenter gradient-bg"
+            >
               <img
                 style={{
                   height: "200px",
-                  width: "225px",
-                  margin: "45px auto",
+                  width: "210px",
+                  margin: "-200px auto",
                   marginBottom: "15px",
                   borderRadius: "50%",
                 }}
@@ -278,37 +290,52 @@ const SearchLayout = () => {
                   justifyContent: "center",
                 }}
               >
-                <input
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
-                  value={username}
-                  type="text"
-                  placeholder="Enter username"
-                  className="hx-input"
-                />
-
-                <div
-                  className="mycenter"
-                  style={{
-                    gap: 15,
-                    marginTop: 15,
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <button className="hx-button" onClick={()=>setUsername("")}>Clear</button>
-                  <button
-                    type="submit"
-                    className="hx-button"
-                    onClick={(e) => handleSubmit(e)}
-                  >
-                    Submit
-                  </button>
-                </div>
+                {checkCredentials ? (
+                  <p style={{ fontSize: "12px", fontWeight: "bold" }}>
+                    Checking the username. Please wait!
+                  </p>
+                ) : (
+                  <>
+                    {" "}
+                    <input
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                      }}
+                      value={username}
+                      type="text"
+                      placeholder="Enter username"
+                      className="hx-input"
+                    />
+                    <div
+                      className="mycenter"
+                      style={{
+                        gap: 15,
+                        marginTop: 15,
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <button
+                        className="hx-button"
+                        onClick={() => setUsername("")}
+                      >
+                        Clear
+                      </button>
+                      <button
+                        type="submit"
+                        className="hx-button"
+                        onClick={(e) => handleSubmit(e)}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ) : (
-            <SearchProfile data={userDetails?.data} handleRead={handleRead} />
+            userDetails?.data?.user && (
+              <SearchProfile data={userDetails?.data} handleRead={handleRead} />
+            )
           )}
         </div>
       )

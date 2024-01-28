@@ -12,6 +12,7 @@ const Profile = ({ data, handleRead }: any) => {
         height: "84vh",
         padding: "20px",
       }}
+      className="gradient-bg-profile"
     >
       <div>
         <div
@@ -73,6 +74,7 @@ const Profile = ({ data, handleRead }: any) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
+          marginBottom: "40px",
         }}
       >
         {Boolean(data?.me?.posts?.edges?.length) &&
@@ -88,18 +90,18 @@ const Profile = ({ data, handleRead }: any) => {
             })}
 
         {Boolean(data?.me?.publications?.edges.length) &&
-          data?.me?.publications?.edges[0]?.node.posts.edges.map(
-            (post: any) => {
+          data?.me?.publications?.edges
+            ?.filter((item: any) => item.node.title !== "")[0]
+            ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
-            }
-          )}
+            })}
 
         {Boolean(data?.me?.publications?.edges.length) &&
-          data?.me?.publications?.edges[1]?.node.posts.edges.map(
-            (post: any) => {
+          data?.me?.publications?.edges
+            ?.filter((item: any) => item.node.title !== "")[1]
+            ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
-            }
-          )}
+            })}
       </div>
     </div>
   );

@@ -3,7 +3,22 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
-
+.gradient-bg {
+  background: linear-gradient(
+    166deg,
+    rgb(14 0 48) 0%,
+    rgba(0, 0, 0, 1) 51%,
+    rgb(30 1 95) 100%
+  );
+}
+.gradient-bg-profile {
+  background: linear-gradient(
+    166deg,
+    rgb(23 0 80) 0%,
+    rgba(0, 0, 0, 1) 51%,
+    rgb(51 35 86) 100%
+  );
+}
 .hx-layout {
   display: flex;
   z-index: 999999;
@@ -31,7 +46,6 @@
   gap: 4px;
   box-shadow: black -3px 5px 30px -3px;
 }
-
 
 .hx-input {
   color: white;

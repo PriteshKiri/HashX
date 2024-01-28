@@ -12,6 +12,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
         height: "84vh",
         padding: "20px",
       }}
+      className="gradient-bg-profile"
     >
       <div>
         <div
@@ -92,18 +93,17 @@ const SearchProfile = ({ data, handleRead }: any) => {
             })}
 
         {Boolean(data?.user?.publications?.edges.length) &&
-          data?.user?.publications?.edges[0]?.node.posts.edges.map(
-            (post: any) => {
+          data?.user?.publications?.edges
+            ?.filter((item: any) => item.node.title !== "")[0]
+            ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
-            }
-          )}
-
+            })}
         {Boolean(data?.user?.publications?.edges.length) &&
-          data?.user?.publications?.edges[1]?.node.posts.edges.map(
-            (post: any) => {
+          data?.user?.publications?.edges
+            ?.filter((item: any) => item.node.title !== "")[1]
+            ?.node.posts.edges.map((post: any) => {
               return <ProfileBlogCard item={post} handleRead={handleRead} />;
-            }
-          )}
+            })}
       </div>
     </div>
   );

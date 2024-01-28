@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState, FormEvent } from "react";
-import { LogOutContext, SetLogOutContext, SetPATContext, SideBarStatusContext } from "../Layout";
+import {
+  LogOutContext,
+  SetLogOutContext,
+  SetPATContext,
+  SideBarStatusContext,
+} from "../Layout";
 import Loader from "../components/util/Loader";
 import Profile from "../components/Profile";
 import Blog from "../components/Blog";
-
-
-
 
 declare global {
   interface Window {
@@ -17,13 +19,13 @@ const ProfileLayout = () => {
   const logout: any = useContext(LogOutContext);
   const setLogOut: any = useContext(SetLogOutContext);
   const open: any = useContext(SideBarStatusContext);
-
   const setGlobalPAT: any = useContext(SetPATContext);
   const [userDetails, setUserDetails]: any = useState({});
   const [pat, setPAT]: any = useState("");
   const [showBlog, setShowBlog] = useState(false);
   const [fetchMode, setFetchMode] = useState(false);
   const [blogId, setBlogId] = useState("");
+  const [checkCredentials, setCheckCredentials] = useState(false);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -33,13 +35,12 @@ const ProfileLayout = () => {
       if (window.chrome) {
         window.chrome.storage.local.set({ username: pat }).then(() => {
           console.log(pat, "value is set");
+          setCheckCredentials(true);
           setFetchMode(true);
         });
       }
     }
   };
-
-  console.log(logout);
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
@@ -161,9 +162,11 @@ const ProfileLayout = () => {
             if (response?.errors?.length) {
               setLogOut(true);
               setFetchMode(false);
+              setCheckCredentials(false);
             } else {
               setLogOut(false);
               setUserDetails(response);
+              setCheckCredentials(false);
             }
           })
           .catch((err) => console.error(err));
@@ -180,118 +183,139 @@ const ProfileLayout = () => {
       </div>
     );
   } else {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        paddingTop: 0,
-      }}
-    >
-      {" "}
-      {!logout && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "15px",
-          }}
-          className="bdr-b"
-        >
-          <p style={{ fontWeight: "600", margin: "0px" }}>Profile</p>
-        </div>
-      )}
-      {logout && open && (
-        <div style={{ flexDirection: "column" }} className="mycenter">
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          paddingTop: 0,
+        }}
+      >
+        {" "}
+        {!logout && (
           <div
             style={{
-              height: "120px",
-              width: "120px",
-              margin: "auto",
-              borderRadius: "50%",
-              backgroundImage: `url("https://res.cloudinary.com/ddlhk5yje/image/upload/v1705917787/hashx/hashx_bkm3wo.png")`,
-              backgroundSize: "cover",
-              marginTop: "120px",
-            }}
-          ></div>
-          <h1 className="hx-h1" style={{ textAlign: "center", margin: "auto" }}>
-            HashX
-          </h1>
-          <p
-            style={{ textAlign: "center", color: "#94a3b8", marginTop: "5px", fontSize:"14px" }}
-          >
-            World's first Hashnode eXtension
-          </p>
-          <small
-            style={{
-              textAlign: "center",
-              margin: "10px",
-              fontSize: "10px",
-              width: "85%",
-              marginTop: "20px",
-              color: "#b7b7b7",
-            }}
-          >
-            Please enter your Personal Access token. Click{" "}
-            <a
-              className="hx-link"
-              href="https://hashnode.com/settings/developer"
-              target="__blank"
-            >
-              here
-            </a>{" "}
-            to generate.
-          </small>
-          <div
-            style={{
-              marginBottom: "20px",
-              marginTop: "30px",
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
               justifyContent: "center",
+              alignItems: "center",
+              padding: "15px",
             }}
+            className="bdr-b"
           >
-            <input
-              onChange={(e) => {
-                setPAT(e.target.value);
-              }}
-              value={pat}
-              type="text"
-              placeholder="Enter Personal Access Token"
-              className="hx-input"
-            />
-
+            <p style={{ fontWeight: "600", margin: "0px" }}>Profile</p>
+          </div>
+        )}
+        {logout && open && (
+          <div
+            style={{ flexDirection: "column", height: "90vh" }}
+            className="mycenter gradient-bg"
+          >
             <div
-              className="mycenter"
               style={{
-                gap: 15,
-                marginTop: 15,
-                justifyContent: "space-between",
+                height: "120px",
+                width: "120px",
+                margin: "11px auto",
+                borderRadius: "50%",
+                backgroundImage: `url("https://res.cloudinary.com/ddlhk5yje/image/upload/v1705917787/hashx/hashx_bkm3wo.png")`,
+                backgroundSize: "cover",
+                marginTop: "-75px",
+              }}
+            ></div>
+            <h1
+              className="hx-h1"
+              style={{ textAlign: "center", margin: "0px auto" }}
+            >
+              HashX
+            </h1>
+            <p
+              style={{
+                textAlign: "center",
+                color: "#94a3b8",
+                marginTop: "5px",
+                fontSize: "14px",
               }}
             >
-              <button className="hx-button" onClick={()=>setPAT("")}>Clear</button>
-              <button
-                type="submit"
-                className="hx-button"
-                onClick={(e) => handleSubmit(e)}
+              World's first Hashnode eXtension
+            </p>
+            <small
+              style={{
+                textAlign: "center",
+                margin: "10px",
+                fontSize: "10px",
+                width: "85%",
+                marginTop: "20px",
+                color: "#b7b7b7",
+              }}
+            >
+              Please enter your Personal Access token. Click{" "}
+              <a
+                className="hx-link"
+                href="https://hashnode.com/settings/developer"
+                target="__blank"
               >
-                Submit
-              </button>
+                here
+              </a>{" "}
+              to generate.
+            </small>
+            <div
+              style={{
+                marginBottom: "20px",
+                marginTop: "30px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {checkCredentials ? (
+                <p style={{ fontSize: "12px", fontWeight: "bold" }}>
+                  Checking your token. Please wait!
+                </p>
+              ) : (
+                <>
+                  {" "}
+                  <input
+                    onChange={(e) => {
+                      setPAT(e.target.value);
+                    }}
+                    value={pat}
+                    type="text"
+                    placeholder="Enter Personal Access Token"
+                    className="hx-input"
+                  />
+                  <div
+                    className="mycenter"
+                    style={{
+                      gap: 15,
+                      marginTop: 15,
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <button className="hx-button" onClick={() => setPAT("")}>
+                      Clear
+                    </button>
+                    <button
+                      type="submit"
+                      className="hx-button"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        </div>
-      )}
-      {!logout &&
-        (Object.keys(userDetails)?.length !== 0 ? (
-          <Profile data={userDetails?.data} handleRead={handleRead} />
-        ) : (
-          <Loader />
-        ))}
-    </div>
-  );
-}
+        )}
+        {!logout &&
+          (Object.keys(userDetails)?.length !== 0 ? (
+            <Profile data={userDetails?.data} handleRead={handleRead} />
+          ) : (
+            <Loader />
+          ))}
+      </div>
+    );
+  }
 };
 
 export default ProfileLayout;
