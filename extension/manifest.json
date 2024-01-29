@@ -1,12 +1,19 @@
 {
+  "manifest_version": 3,
   "name": "HashX",
   "version": "1.0.0",
-  "manifest_version": 3,
-  "permissions": ["storage"],
+  "description": "World's first Hashnode Extension.",
+  "icons": {
+    "16": "images/hx-16x16.png",
+    "32": "images/hx-32x32.png",
+    "64": "images/hx-64x64.png",
+    "128": "images/hx-128x128.png"
+  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "permissions": ["clipboardWrite","storage"]
 }
