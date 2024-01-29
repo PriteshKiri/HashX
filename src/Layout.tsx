@@ -150,6 +150,24 @@ const Layout = ({ children }: any) => {
             onClick={() => setTab("feed")}
           >
             <svg
+              style={{
+                height: "20px",
+              }}
+              width="22"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              fill="none"
+            >
+              <path
+                fill="currentColor"
+                d="M18.15 7.85V5a2.75 2.75 0 0 0-2.75-2.75H5A2.75 2.75 0 0 0 2.25 5v12A4.75 4.75 0 0 0 7 21.75h12.2a2.55 2.55 0 0 0 2.55-2.55v-9.1a2.25 2.25 0 0 0-2.25-2.25h-1.35Zm1.05 12.4c.58 0 1.05-.47 1.05-1.05v-9.1a.75.75 0 0 0-.75-.75h-1.35v9.85c0 .58.47 1.05 1.05 1.05ZM7.95 6.75a.75.75 0 1 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Zm0 4.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Zm0 4.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Z"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-user"
               style={{
@@ -168,7 +186,7 @@ const Layout = ({ children }: any) => {
               <circle cx="5" cy="19" r="1" />
               <path d="M4 4a16 16 0 0 1 16 16" />
               <path d="M4 11a9 9 0 0 1 9 9" />
-            </svg>
+            </svg> */}
           </div>
         </Tooltip>
         <Tooltip content="Bookmarks">
@@ -252,7 +270,13 @@ const Layout = ({ children }: any) => {
             }}
             className={`mycenter bdr-all  "nav-btn-gradient-hover"
              `}
-            onClick={() =>{ setTab("podcast");window.open('https://podcasters.spotify.com/pod/show/the-commit', '_blank')}}
+            onClick={() => {
+              setTab("podcast");
+              window.open(
+                "https://podcasters.spotify.com/pod/show/the-commit",
+                "_blank"
+              );
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -282,7 +306,7 @@ const Layout = ({ children }: any) => {
         className={"bdr-l"}
         style={{
           backgroundColor: "black",
-          transition: "all",
+          transition: "width 0.2s ease-in-out",
           width: open ? "400px" : "0px",
         }}
       >
