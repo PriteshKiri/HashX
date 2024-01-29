@@ -207,7 +207,7 @@ const Layout = ({ children }: any) => {
             </svg>
           </div>
         </Tooltip>
-        <Tooltip content="Search user">
+        <Tooltip content="Search User">
           {/* Feed */}
           <div
             style={{
@@ -240,6 +240,40 @@ const Layout = ({ children }: any) => {
               <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5" />
               <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
               <path d="M20.2 20.2l1.8 1.8" />
+            </svg>
+          </div>
+        </Tooltip>
+        <Tooltip content="The Commit Podcast">
+          <div
+            style={{
+              padding: "4px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+            className={`mycenter bdr-all  "nav-btn-gradient-hover"
+             `}
+            onClick={() =>{ setTab("podcast");window.open('https://podcasters.spotify.com/pod/show/the-commit', '_blank')}}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-brand-spotify"
+              style={{
+                height: "20px",
+              }}
+              width="22"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+              <path d="M8 11.973c2.5 -1.473 5.5 -.973 7.5 .527" />
+              <path d="M9 15c1.5 -1 4 -1 5 .5" />
+              <path d="M7 9c2 -1 6 -2 10 .5" />
             </svg>
           </div>
         </Tooltip>
