@@ -37,6 +37,9 @@ const Main = (): any => {
   if (tab === "search") {
     return <SearchLayout />;
   }
+  if (tab === "podcast") {
+    return <ProfileLayout />;
+  }
 };
 
 export default Main;

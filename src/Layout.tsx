@@ -253,10 +253,10 @@ const Layout = ({ children }: any) => {
               borderRadius: "6px",
               cursor: "pointer",
             }}
-            className={`mycenter bdr-all  "nav-btn-gradient-hover"
+            className={`mycenter bdr-all nav-btn-gradient-hover
              `}
             onClick={() => {
-              setTab("podcast");
+              setTab("profile");
               window.open(
                 "https://podcasters.spotify.com/pod/show/the-commit",
                 "_blank"
