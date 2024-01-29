@@ -44,10 +44,35 @@ const ProfileBlogCard = ({ item, handleRead, showSnackbar }: any) => {
         }}
         className="bdr-b"
       >
-        <p
-          className="hx-p"
-          style={{ margin: 0 }}
-        >{`${item?.node?.readTimeInMinutes} min read`}</p>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-book"
+            style={{
+              width: "14px",
+              height: "14px",
+            }}
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#94a3b8"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+            <path d="M3 6l0 13" />
+            <path d="M12 6l0 13" />
+            <path d="M21 6l0 13" />
+          </svg>
+          <p
+            className="hx-p"
+            style={{ margin: 0 }}
+          >{`${item?.node?.readTimeInMinutes} min read`}</p>
+        </div>
 
         <p className="hx-p" style={{ margin: 0 }}>
           {formatDate(item?.node?.publishedAt)}

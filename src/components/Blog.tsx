@@ -233,6 +233,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
 
         <div
           className="post-details"
+          style={{ marginBottom: "40px" }}
           dangerouslySetInnerHTML={{ __html: data?.post?.content?.html || "" }}
         />
       </div>
