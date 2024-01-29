@@ -216,6 +216,10 @@ const SearchLayout = () => {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-arrow-left"
+                    style={{
+                      width: "18px",
+                      height: "18px",
+                    }}
                     width="18"
                     height="18"
                     viewBox="0 0 24 24"
@@ -230,7 +234,7 @@ const SearchLayout = () => {
                     <path d="M5 12l6 6" />
                     <path d="M5 12l6 -6" />
                   </svg>
-                  <p style={{ margin: 0,fontSize:"14px" }}>Back</p>
+                  <p style={{ margin: 0, fontSize: "14px" }}>Back</p>
                 </div>
 
                 <a
@@ -241,6 +245,10 @@ const SearchLayout = () => {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-external-link"
+                    style={{
+                      width: "18px",
+                      height: "18px",
+                    }}
                     width="18"
                     height="18"
                     viewBox="0 0 24 24"

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "HashX",
   "version": "1.0.0",
-  "description": "World's first Hashnode Extension.",
+  "description": "World's first Hashnode Extension. Read and explore Hashnode blogs on every webpage",
   "icons": {
     "16": "images/hx-16x16.png",
     "32": "images/hx-32x32.png",
@@ -15,5 +15,5 @@
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["clipboardWrite","storage"]
+  "permissions": ["clipboardWrite", "storage"]
 }

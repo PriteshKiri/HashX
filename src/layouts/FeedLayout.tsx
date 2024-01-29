@@ -63,6 +63,10 @@ const FeedLayout = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-wand"
+                style={{
+                  width: "16px",
+                  height: "16px",
+                }}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -89,6 +93,10 @@ const FeedLayout = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-users"
+                style={{
+                  width: "16px",
+                  height: "16px",
+                }}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -115,6 +123,10 @@ const FeedLayout = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-star"
+                style={{
+                  width: "16px",
+                  height: "16px",
+                }}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"

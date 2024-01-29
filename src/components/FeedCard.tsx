@@ -27,7 +27,7 @@ const FeedCard = ({
     >
       <div
         style={{
-          height: "185px",
+          height: "170px",
           width: "100%",
           borderRadius: "8px",
           backgroundImage: `url(${item?.node?.coverImage?.url})`,
@@ -85,7 +85,7 @@ const FeedCard = ({
               style={{
                 color: "rgb(148, 163, 184)",
                 fontStyle: "italic",
-                fontSize:"11px"
+                fontSize: "11px",
               }}
             >
               @{item?.node?.author?.username}
@@ -149,6 +149,8 @@ const FeedCard = ({
                 background: "#ff191938",
                 borderRadius: "50%",
                 padding: "3px",
+                width: "14px",
+                height: "14px",
               }}
               width="14"
               height="14"
@@ -162,7 +164,9 @@ const FeedCard = ({
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
             </svg>
-            <small style={{fontWeight:"12px"}}>{item?.node?.reactionCount}</small>
+            <small style={{ fontWeight: "12px" }}>
+              {item?.node?.reactionCount}
+            </small>
           </div>
           <div
             style={{
@@ -179,6 +183,8 @@ const FeedCard = ({
                 background: "#00abfb47",
                 borderRadius: "50%",
                 padding: "3px",
+                width: "14px",
+                height: "14px",
               }}
               width="14"
               height="14"
@@ -193,14 +199,14 @@ const FeedCard = ({
               <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
               <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
             </svg>
-            <small style={{fontWeight:"12px"}}>{item?.node?.views}</small>
+            <small style={{ fontWeight: "12px" }}>{item?.node?.views}</small>
           </div>
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              cursor:"pointer"
+              cursor: "pointer",
             }}
             onClick={handleCopyBlogLink}
           >
@@ -211,6 +217,8 @@ const FeedCard = ({
                 background: "#730dff63",
                 borderRadius: "50%",
                 padding: "3px",
+                width: "14px",
+                height: "14px",
               }}
               width="14"
               height="14"
@@ -245,6 +253,10 @@ const FeedCard = ({
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-external-link"
+              style={{
+                width: "18px",
+                height: "18px",
+              }}
               width="18"
               height="18"
               viewBox="0 0 24 24"

@@ -100,6 +100,10 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-arrow-left"
+            style={{
+              width: "18px",
+              height: "18px",
+            }}
             width="18"
             height="18"
             viewBox="0 0 24 24"
@@ -114,13 +118,17 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             <path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
           </svg>
-          <p style={{ margin: 0,fontSize:"14px" }} >Back</p>
+          <p style={{ margin: 0, fontSize: "14px" }}>Back</p>
         </div>
 
         <a href={data?.post?.url} target="_blank" rel="noopener noreferrer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-external-link"
+            style={{
+              width: "18px",
+              height: "18px",
+            }}
             width="18"
             height="18"
             viewBox="0 0 24 24"
@@ -145,7 +153,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           flexDirection: "column",
           gap: 5,
           overflowY: "scroll",
-          height: "77vh",
+          height: "82vh",
           position: "relative",
         }}
       >
@@ -163,7 +171,14 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
         </div>
 
         <div>
-          <h1 style={{ textAlign: "center", fontSize: 20, fontWeight: 600 }}>
+          <h1
+            style={{
+              textAlign: "center",
+              fontSize: 20,
+              fontWeight: 600,
+              color: "white",
+            }}
+          >
             {data?.post?.title}
           </h1>
           <h2
@@ -196,7 +211,15 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               backgroundSize: "cover",
             }}
           ></div>
-          <p style={{ margin: "0px", fontSize: "11px", fontWeight: "600" }}>
+          <p
+            style={{
+              margin: "0px",
+              fontSize: "11px",
+              fontWeight: "600",
+              display: "flex",
+              gap: "3px",
+            }}
+          >
             {data?.post?.author?.name} ·{" "}
             <span style={{ fontWeight: 400 }}>
               {formatDate(data?.post?.publishedAt ?? "")}

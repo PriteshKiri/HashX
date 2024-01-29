@@ -28,8 +28,8 @@ const Profile = ({ data, handleRead }: any) => {
       <div>
         <div
           style={{
-            height: "120px",
-            width: "120px",
+            height: "140px",
+            width: "140px",
             margin: "auto",
             borderRadius: "50%",
             backgroundImage: `url(${data?.me?.profilePicture})`,
@@ -62,13 +62,13 @@ const Profile = ({ data, handleRead }: any) => {
           marginTop: "7px",
         }}
       >
-        <p style={{ fontSize: "14px" }}>
+        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.me?.followersCount)}
           </span>{" "}
           Followers
         </p>
-        <p style={{ fontSize: "14px" }}>
+        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.me?.followingsCount)}
           </span>{" "}

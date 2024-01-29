@@ -184,6 +184,10 @@ const FeedUserProfile = ({ username, setShowFeedUserProfile }: any) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-arrow-left"
+                  style={{
+                    width: "18px",
+                    height: "18px",
+                  }}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -209,6 +213,10 @@ const FeedUserProfile = ({ username, setShowFeedUserProfile }: any) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-external-link"
+                  style={{
+                    width: "18px",
+                    height: "18px",
+                  }}
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"

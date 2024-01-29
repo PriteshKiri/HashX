@@ -32,10 +32,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
       }}
     >
       {website && (
-        <a href={website} target="_blank" rel="noopener noreferrer">
+        <a
+          href={website}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-world"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -55,10 +64,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {github && (
-        <a href={github} target="_blank" rel="noopener noreferrer">
+        <a
+          href={github}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-github"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -74,10 +92,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {twitter && (
-        <a href={twitter} target="_blank" rel="noopener noreferrer">
+        <a
+          href={twitter}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-x"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -94,10 +121,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {instagram && (
-        <a href={instagram} target="_blank" rel="noopener noreferrer">
+        <a
+          href={instagram}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-instagram"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -115,10 +151,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {facebook && (
-        <a href={facebook} target="_blank" rel="noopener noreferrer">
+        <a
+          href={facebook}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-facebook"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -134,10 +179,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {stackoverflow && (
-        <a href={stackoverflow} target="_blank" rel="noopener noreferrer">
+        <a
+          href={stackoverflow}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-stackoverflow"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -157,10 +211,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {linkedin && (
-        <a href={linkedin} target="_blank" rel="noopener noreferrer">
+        <a
+          href={linkedin}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-linkedin"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -180,10 +243,19 @@ const SocialMediaLinks: React.FC<SocialMediaLinksProps> = ({
         </a>
       )}
       {youtube && (
-        <a href={youtube} target="_blank" rel="noopener noreferrer">
+        <a
+          href={youtube}
+          target="_blank"
+          className="mycenter"
+          rel="noopener noreferrer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-brand-youtube"
+            style={{
+              width: "24px",
+              height: "24px",
+            }}
             width="24"
             height="24"
             viewBox="0 0 24 24"

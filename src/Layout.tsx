@@ -61,11 +61,12 @@ const Layout = ({ children }: any) => {
                 height: "20px",
                 transform: "rotate(180deg)",
                 transition: "all",
+                width: "20px",
               }}
               width="22"
               height="44"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="#ffffff"
               fill="none"
               stroke-linecap="round"
@@ -83,6 +84,7 @@ const Layout = ({ children }: any) => {
               style={{
                 height: "20px",
                 transition: "all",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -120,6 +122,7 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-user"
               style={{
                 height: "20px",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -152,6 +155,7 @@ const Layout = ({ children }: any) => {
             <svg
               style={{
                 height: "20px",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -166,27 +170,6 @@ const Layout = ({ children }: any) => {
                 clip-rule="evenodd"
               ></path>
             </svg>
-
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-user"
-              style={{
-                height: "20px",
-              }}
-              width="22"
-              height="44"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="#ffffff"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <circle cx="5" cy="19" r="1" />
-              <path d="M4 4a16 16 0 0 1 16 16" />
-              <path d="M4 11a9 9 0 0 1 9 9" />
-            </svg> */}
           </div>
         </Tooltip>
         <Tooltip content="Bookmarks">
@@ -209,6 +192,7 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-bookmarks"
               style={{
                 height: "20px",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -243,6 +227,7 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-user-search"
               style={{
                 height: "20px",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -283,6 +268,7 @@ const Layout = ({ children }: any) => {
               className="icon icon-tabler icon-tabler-brand-spotify"
               style={{
                 height: "20px",
+                width: "20px",
               }}
               width="22"
               height="44"
@@ -331,16 +317,16 @@ const Layout = ({ children }: any) => {
           />
 
           <Tooltip content="Logout">
-            <p
+            <div
               style={{
                 paddingRight: "12px",
+                cursor: "pointer",
               }}
               onClick={() => {
                 setGlobalPAT("");
                 if (window.chrome) {
                   window.chrome.storage.local.set({ username: "" }).then(() => {
-                    console.log("value is set");
-                    // showSnackbar("Logged out successfully!", 3, "logout");
+                    console.log("value is removed");
                     setLogout(true);
                   });
                 }
@@ -366,7 +352,7 @@ const Layout = ({ children }: any) => {
                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                 <path d="M7 12h14l-3 -3m0 6l3 -3" />
               </svg>
-            </p>
+            </div>
           </Tooltip>
         </div>
         <SideBarStatusContext.Provider value={open}>

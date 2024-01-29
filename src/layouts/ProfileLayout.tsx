@@ -234,7 +234,7 @@ const ProfileLayout = () => {
             ></div>
             <h1
               className="hx-h1"
-              style={{ textAlign: "center", margin: "0px auto" }}
+              style={{ textAlign: "center", margin: "0px auto",color:"white" }}
             >
               HashX
             </h1>
