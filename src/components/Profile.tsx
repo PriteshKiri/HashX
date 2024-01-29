@@ -25,19 +25,19 @@ const Profile = ({ data, handleRead }: any) => {
           type={snackbar.type}
         />
       )}
-      <div>
-        <div
+      <div className="mycenter">
+        <img
+        src={data?.me?.profilePicture}
+        alt="Profile on hashnode"
           style={{
             height: "140px",
             width: "140px",
             margin: "auto",
             borderRadius: "50%",
-            backgroundImage: `url(${data?.me?.profilePicture})`,
-            backgroundSize: "cover",
             marginTop: "15px",
             aspectRatio: "1/1",
           }}
-        ></div>
+        />
       </div>
 
       <h1

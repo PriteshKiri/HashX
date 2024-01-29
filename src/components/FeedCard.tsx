@@ -25,16 +25,18 @@ const FeedCard = ({
         backgroundColor: "#0f172a",
       }}
     >
-      <div
+      <img
+        src={item?.node?.coverImage?.url}
+        alt="cover of blog"
         style={{
           height: "170px",
           width: "100%",
           borderRadius: "8px",
-          backgroundImage: `url(${item?.node?.coverImage?.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></div>
+        className="bdr-all"
+      />
 
       <div
         style={{
@@ -55,15 +57,15 @@ const FeedCard = ({
             gap: 5,
           }}
         >
-          <div
+          <img
+            src={item?.node?.author?.profilePicture}
+            alt="profile on hashnode"
             style={{
               height: "40px",
               width: "40px",
               borderRadius: "50%",
-              backgroundImage: `url(${item?.node?.author?.profilePicture})`,
-              backgroundSize: "cover",
             }}
-          ></div>
+          ></img>
 
           <div
             style={{

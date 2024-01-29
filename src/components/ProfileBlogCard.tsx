@@ -19,16 +19,18 @@ const ProfileBlogCard = ({ item, handleRead, showSnackbar }: any) => {
         backgroundColor: "#0f172a",
       }}
     >
-      <div
+      <img
+        src={item?.node?.coverImage?.url}
+        alt="cover of blog"
         style={{
           height: "170px",
           width: "100%",
           borderRadius: "8px",
-          backgroundImage: `url(${item?.node?.coverImage?.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></div>
+        className="bdr-all"
+      />
 
       <div
         style={{

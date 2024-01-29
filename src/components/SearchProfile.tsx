@@ -26,19 +26,19 @@ const SearchProfile = ({ data, handleRead }: any) => {
         />
       )}
 
-      <div>
-        <div
+      <div className="mycenter">
+        <img
+          src={data?.user?.profilePicture}
+          alt="Profile on hashnode"
           style={{
             height: "140px",
             width: "140px",
             margin: "auto",
             borderRadius: "50%",
-            backgroundImage: `url(${data?.user?.profilePicture})`,
-            backgroundSize: "cover",
             marginTop: "15px",
             aspectRatio: "1/1",
           }}
-        ></div>
+        />
       </div>
       <h1
         style={{
@@ -62,13 +62,29 @@ const SearchProfile = ({ data, handleRead }: any) => {
           marginTop: "7px",
         }}
       >
-        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
+        <p
+          style={{
+            fontSize: "14px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.user?.followersCount || 0)}
           </span>{" "}
           Followers
         </p>
-        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
+        <p
+          style={{
+            fontSize: "14px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.user?.followingsCount || 0)}
           </span>{" "}

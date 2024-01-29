@@ -157,17 +157,16 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           position: "relative",
         }}
       >
-        <div style={{ margin: "15px 0px" }}>
-          <div
+        <div style={{ margin: "15px 0px" }} className="mycenter">
+          <img
+            src={data?.post?.coverImage?.url}
+            alt="blog cover"
             style={{
               height: "185px",
               width: "100%",
               borderRadius: "8px",
-              backgroundImage: `url(${data?.post?.coverImage?.url})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
             }}
-          ></div>
+          ></img>
         </div>
 
         <div>
@@ -202,15 +201,15 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             marginBottom: "15px",
           }}
         >
-          <div
+          <img
+            src={data?.post?.author?.profilePicture}
+            alt="profile on hashnode"
             style={{
               height: "35px",
               width: "35px",
               borderRadius: "50%",
-              backgroundImage: `url(${data?.post?.author?.profilePicture})`,
-              backgroundSize: "cover",
             }}
-          ></div>
+          ></img>
           <p
             style={{
               margin: "0px",
