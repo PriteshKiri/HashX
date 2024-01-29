@@ -31,7 +31,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children }) => {
             style={{
               position: "absolute",
               wordBreak: "normal",
-              right: "35px",
+              right: "45px",
               top: "50%",
               transform: "translateY(-50%)",
               padding: "8px 8px",
@@ -42,6 +42,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children }) => {
               whiteSpace: "nowrap",
               fontSize: "12px",
               display: "block",
+              cursor:"pointer"
             }}
           >
             {content}

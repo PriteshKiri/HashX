@@ -37,7 +37,7 @@ const Loader = () => {
           }
         `}
           </style>
-          <p>Loading...</p>
+          <p style={{ fontSize: "14px", marginTop: "10px" }}>Loading...</p>
         </>
       )}
     </div>

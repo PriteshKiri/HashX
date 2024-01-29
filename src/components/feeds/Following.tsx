@@ -88,7 +88,7 @@ const Following = ({ handleRead,handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "78vh",
+        height: "82vh",
         padding: "15px",
         gap: 15,
       }}

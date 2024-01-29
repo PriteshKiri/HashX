@@ -5,7 +5,7 @@ import Loader from "../util/Loader";
 import SnackBar from "../util/SnackBar";
 import { useSnackbar } from "../../util";
 
-const Featured = ({ handleRead,handleShowProfile }: any) => {
+const Featured = ({ handleRead, handleShowProfile }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
@@ -88,22 +88,29 @@ const Featured = ({ handleRead,handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "78vh",
+        height: "82vh",
         padding: "15px",
         gap: 15,
       }}
     >
-           {snackbar && (
+      {snackbar && (
         <SnackBar
           message={snackbar.message}
           time={snackbar.duration}
           type={snackbar.type}
         />
-      )} {" "}
+      )}{" "}
       {Object.keys(feedData)?.length !== 0 ? (
         feedData?.data?.feed?.edges
           ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => <FeedCard item={item} handleRead={handleRead} handleShowProfile={handleShowProfile} showSnackbar={showSnackbar}/>)
+          .map((item: any) => (
+            <FeedCard
+              item={item}
+              handleRead={handleRead}
+              handleShowProfile={handleShowProfile}
+              showSnackbar={showSnackbar}
+            />
+          ))
       ) : (
         <Loader />
       )}

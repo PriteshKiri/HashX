@@ -209,7 +209,7 @@
 }
 
 .post-details img {
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 5px;
   width: 100%;
   border-radius: 8px;
@@ -226,7 +226,7 @@
 .post-details p {
   margin: 10px 0px;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 20px;
 }
 
 .post-details p code {
@@ -270,7 +270,7 @@
   box-shadow: 2px 2px 8px rgb(40, 40, 40);
   border-radius: 5px;
   padding: 20px;
-  margin: 10px 0px;
+  margin: 20px 0px;
   color: #fafafa;
   background-color: #1e293b;
   overflow-x: auto;

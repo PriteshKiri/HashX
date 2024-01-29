@@ -44,8 +44,10 @@ const Profile = ({ data, handleRead }: any) => {
         style={{
           color: "white",
           margin: "20px auto 0px",
+          fontSize: "24px",
+          fontWeight: "600px",
+          textAlign: "center",
         }}
-        className="hx-h1"
       >
         {data?.me?.name}
       </h1>
@@ -57,7 +59,7 @@ const Profile = ({ data, handleRead }: any) => {
           display: "flex",
           gap: 25,
           justifyContent: "center",
-          marginTop: "10px",
+          marginTop: "7px",
         }}
       >
         <p style={{ fontSize: "14px" }}>

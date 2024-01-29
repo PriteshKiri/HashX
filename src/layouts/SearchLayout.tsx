@@ -230,7 +230,7 @@ const SearchLayout = () => {
                     <path d="M5 12l6 6" />
                     <path d="M5 12l6 -6" />
                   </svg>
-                  <p style={{ margin: 0 }}>Back</p>
+                  <p style={{ margin: 0,fontSize:"14px" }}>Back</p>
                 </div>
 
                 <a

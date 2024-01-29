@@ -37,8 +37,8 @@ const ProfileBlogCard = ({ item, handleRead,showSnackbar }: any) => {
           alignItems: "center",
           width: "100%",
           margin: "15px 0px",
-          paddingBottom: "5px",
-          marginTop: "5px",
+          paddingBottom: "10px",
+          marginTop: "10px",
           color: "#94a3b8",
           fontStyle: "italic",
         }}
@@ -115,7 +115,7 @@ const ProfileBlogCard = ({ item, handleRead,showSnackbar }: any) => {
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
             </svg>
-            <small>{item?.node?.reactionCount}</small>
+            <small style={{fontSize:"12px"}}>{item?.node?.reactionCount}</small>
           </div>
           <div
             style={{
@@ -146,7 +146,7 @@ const ProfileBlogCard = ({ item, handleRead,showSnackbar }: any) => {
               <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
               <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
             </svg>
-            <small>{item?.node?.views}</small>
+            <small style={{fontSize:"12px"}}>{item?.node?.views}</small>
           </div>
           <div
             style={{

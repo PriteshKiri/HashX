@@ -114,7 +114,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             <path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
           </svg>
-          <p style={{ margin: 0 }}>Back</p>
+          <p style={{ margin: 0,fontSize:"14px" }} >Back</p>
         </div>
 
         <a href={data?.post?.url} target="_blank" rel="noopener noreferrer">
@@ -169,7 +169,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           <h2
             style={{
               textAlign: "center",
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: 500,
               color: "#9b9b9b",
             }}

@@ -206,7 +206,7 @@ const ProfileLayout = () => {
             }}
             className="bdr-b"
           >
-            <p style={{ fontWeight: "600", margin: "0px" }}>Profile</p>
+            <p style={{ fontWeight: "600", margin: "0px",fontSize:"14px" }}>Profile</p>
           </div>
         )}
         {logout && open && (

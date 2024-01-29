@@ -84,7 +84,7 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "80vh",
+        height: "84vh",
         padding: "15px",
         gap: 15,
       }}

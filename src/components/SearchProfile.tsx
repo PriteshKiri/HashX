@@ -44,8 +44,10 @@ const SearchProfile = ({ data, handleRead }: any) => {
         style={{
           color: "white",
           margin: "20px auto 0px",
+          fontSize: "24px",
+          fontWeight: "600px",
+          textAlign: "center",
         }}
-        className="hx-h1"
       >
         {data?.user?.name}
       </h1>
@@ -57,16 +59,16 @@ const SearchProfile = ({ data, handleRead }: any) => {
           display: "flex",
           gap: 25,
           justifyContent: "center",
-          marginTop: "10px",
+          marginTop: "7px",
         }}
       >
-        <p>
+        <p style={{ fontSize: "14px" }}>
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.user?.followersCount || 0)}
           </span>{" "}
           Followers
         </p>
-        <p>
+        <p style={{ fontSize: "14px" }}>
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.user?.followingsCount || 0)}
           </span>{" "}
@@ -94,27 +96,51 @@ const SearchProfile = ({ data, handleRead }: any) => {
       >
         {Boolean(data?.user?.posts?.edges?.length) &&
           data?.user?.posts?.edges?.map((post: any) => {
-            return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar}/>;
+            return (
+              <ProfileBlogCard
+                item={post}
+                handleRead={handleRead}
+                showSnackbar={showSnackbar}
+              />
+            );
           })}
 
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.find((item: any) => item.node.title === "")
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
 
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[0]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
         {Boolean(data?.user?.publications?.edges.length) &&
           data?.user?.publications?.edges
             ?.filter((item: any) => item.node.title !== "")[1]
             ?.node.posts.edges.map((post: any) => {
-              return <ProfileBlogCard item={post} handleRead={handleRead} showSnackbar={showSnackbar} />;
+              return (
+                <ProfileBlogCard
+                  item={post}
+                  handleRead={handleRead}
+                  showSnackbar={showSnackbar}
+                />
+              );
             })}
       </div>
     </div>
