@@ -82,7 +82,7 @@ const FeedLayout = () => {
                 <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
                 <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
               </svg>{" "}
-              <p style={{ margin: 0 }}>Personalized</p>
+              <p style={{ margin: 0, fontSize: "12px" }}>Personalized</p>
             </div>
             <div
               className={
@@ -112,7 +112,7 @@ const FeedLayout = () => {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
               </svg>
-              <p style={{ margin: 0 }}>Following</p>
+              <p style={{ margin: 0, fontSize: "12px" }}>Following</p>
             </div>
             <div
               className={
@@ -139,7 +139,7 @@ const FeedLayout = () => {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
               </svg>
-              <p style={{ margin: 0 }}>Featured</p>
+              <p style={{ margin: 0, fontSize: "12px" }}>Featured</p>
             </div>
           </div>
           {tabType === "personalized" ? (

@@ -5,7 +5,7 @@ import Loader from "../util/Loader";
 import { useSnackbar } from "../../util";
 import SnackBar from "../util/SnackBar";
 
-const Following = ({ handleRead,handleShowProfile }: any) => {
+const Following = ({ handleRead, handleShowProfile }: any) => {
   const setGlobalPAT: any = useContext(SetPATContext);
   const [fetchMode, setFetchMode] = useState(false);
   const [pat, setPAT]: any = useState("");
@@ -93,7 +93,6 @@ const Following = ({ handleRead,handleShowProfile }: any) => {
         gap: 15,
       }}
     >
-          
       {snackbar && (
         <SnackBar
           message={snackbar.message}
@@ -102,9 +101,22 @@ const Following = ({ handleRead,handleShowProfile }: any) => {
         />
       )}{" "}
       {Object.keys(feedData)?.length !== 0 ? (
-        feedData?.data?.feed?.edges
-          ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => <FeedCard item={item} handleRead={handleRead} handleShowProfile={handleShowProfile} showSnackbar={showSnackbar} />)
+        feedData?.data?.feed?.edges.length > 0 ? (
+          feedData?.data?.feed?.edges
+            ?.filter((item: any) => Boolean(item?.node?.coverImage))
+            .map((item: any) => (
+              <FeedCard
+                item={item}
+                handleRead={handleRead}
+                handleShowProfile={handleShowProfile}
+                showSnackbar={showSnackbar}
+              />
+            ))
+        ) : (
+          <p style={{ fontSize: "16px", margin: "auto" }}>
+            Following Feeds not available :(
+          </p>
+        )
       ) : (
         <Loader />
       )}

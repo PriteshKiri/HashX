@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "HashX: Explore top-notch Hashnode technical articles on every website",
+  "name": "HashX: Access Hashnode blogs on every website",
   "version": "1.0.0",
-  "description": "HashX is the world's first Hashnode Chrome extension. Now you can read and explore Hashnode blogs on every website",
+  "description": "HashX is the world's first Hashnode Chrome extension. Now you can read Hashnode blogs on every website.",
   "icons": {
     "16": "images/hx-16x16.png",
     "32": "images/hx-32x32.png",

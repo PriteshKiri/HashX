@@ -101,16 +101,22 @@ const Featured = ({ handleRead, handleShowProfile }: any) => {
         />
       )}{" "}
       {Object.keys(feedData)?.length !== 0 ? (
-        feedData?.data?.feed?.edges
-          ?.filter((item: any) => Boolean(item?.node?.coverImage))
-          .map((item: any) => (
-            <FeedCard
-              item={item}
-              handleRead={handleRead}
-              handleShowProfile={handleShowProfile}
-              showSnackbar={showSnackbar}
-            />
-          ))
+        feedData?.data?.feed?.edges.length > 0 ? (
+          feedData?.data?.feed?.edges
+            ?.filter((item: any) => Boolean(item?.node?.coverImage))
+            .map((item: any) => (
+              <FeedCard
+                item={item}
+                handleRead={handleRead}
+                handleShowProfile={handleShowProfile}
+                showSnackbar={showSnackbar}
+              />
+            ))
+        ) : (
+          <p style={{ fontSize: "16px", margin: "auto" }}>
+            Featured Feeds not available :(
+          </p>
+        )
       ) : (
         <Loader />
       )}

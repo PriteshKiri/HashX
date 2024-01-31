@@ -23,7 +23,7 @@ const ProfileLayout = () => {
   const open: any = useContext(SideBarStatusContext);
   const setGlobalPAT: any = useContext(SetPATContext);
   const [userDetails, setUserDetails]: any = useState({});
-  const [pat, setPAT]: any = useState("");
+  const [pat, setPAT] = useState<string>("");
   const [showBlog, setShowBlog] = useState(false);
   const [fetchMode, setFetchMode] = useState(false);
   const [blogId, setBlogId] = useState("");
@@ -49,13 +49,19 @@ const ProfileLayout = () => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
       console.log(username, "usererrfet");
 
-      if (username !== "" || username !== null || username !== undefined) {
+      if (
+        username 
+      ) {
         setPAT(username);
         setGlobalPAT(username);
         setFetchMode(true);
+        console.log(username, "inside" );
+
+        console.log("setpat");
       } else {
         setLogOut(true);
         setFetchMode(false);
+        console.log("else setpat");
       }
     });
   }, []);
@@ -206,7 +212,9 @@ const ProfileLayout = () => {
             }}
             className="bdr-b"
           >
-            <p style={{ fontWeight: "600", margin: "0px",fontSize:"14px" }}>Profile</p>
+            <p style={{ fontWeight: "600", margin: "0px", fontSize: "14px" }}>
+              Profile
+            </p>
           </div>
         )}
         {logout && open && (
@@ -234,7 +242,11 @@ const ProfileLayout = () => {
             ></div>
             <h1
               className="hx-h1"
-              style={{ textAlign: "center", margin: "0px auto",color:"white" }}
+              style={{
+                textAlign: "center",
+                margin: "0px auto",
+                color: "white",
+              }}
             >
               HashX
             </h1>
@@ -308,7 +320,9 @@ const ProfileLayout = () => {
                     <button
                       type="submit"
                       onClick={(e) => handleSubmit(e)}
-                      className={pat.trim() ? "hx-button" : "hx-button-disable"}
+                      className={`${
+                        pat.trim() ? "hx-button" : "hx-button-disable"
+                      }`}
                       disabled={pat.trim() ? false : true}
                     >
                       Submit

@@ -357,7 +357,7 @@ const SearchLayout = () => {
                         className={
                           username.trim() ? "hx-button" : "hx-button-disable"
                         }
-                        disabled={username.trim() ? false : true}
+                        disabled={!username.trim()}
                       >
                         Submit
                       </button>
