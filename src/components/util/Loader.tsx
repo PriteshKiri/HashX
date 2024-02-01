@@ -13,12 +13,13 @@ const Loader = () => {
   return (
     <div
       style={{
-        height: "92vh",
+        height: "calc(100svh - 140px)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         padding: "40px",
+        boxSizing: "content-box",
       }}
     >
       {open && (
@@ -37,7 +38,9 @@ const Loader = () => {
           }
         `}
           </style>
-          <p style={{ fontSize: "14px", marginTop: "10px",color:"white" }}>Loading...</p>
+          <p style={{ fontSize: "14px", marginTop: "10px", color: "white" }}>
+            Loading...
+          </p>
         </>
       )}
     </div>

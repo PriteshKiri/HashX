@@ -117,7 +117,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             <path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
           </svg>
-          <p style={{ margin: 0, fontSize: "14px", color: "white" }}>Back</p>
+        
         </div>
 
         <a href={data?.post?.url} target="_blank" rel="noopener noreferrer">
@@ -152,7 +152,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           flexDirection: "column",
           gap: 5,
           overflowY: "scroll",
-          height: "calc(100vh - 190px)",
+          height: "calc(100vh - 179px)",
           position: "relative",
           boxSizing: "content-box",
           paddingTop: "10px",
