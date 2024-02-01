@@ -182,29 +182,23 @@
   );
 }
 
-.post-details p {
-  color: rgb(255, 255, 255);
-  margin: 2px;
-}
-
 .post-details h1 {
   font-size: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 15px 0px;
   font-weight: 600;
   color: #c8a4df;
 }
 
 .post-details h2 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #888de8;
+  margin: 15px 0px;
 }
 
 .post-details h3 {
-  font-size: 16px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin: 15px 0px;
   font-weight: 600;
   color: #81bff7;
 }
@@ -225,6 +219,7 @@
   font-size: 12px;
 }
 .post-details p {
+  color: white;
   margin: 10px 0px;
   font-size: 12px;
   line-height: 20px;

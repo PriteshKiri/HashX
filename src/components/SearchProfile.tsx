@@ -60,7 +60,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
           display: "flex",
           gap: 25,
           justifyContent: "center",
-          marginTop: "7px",
+          marginTop: "5px",
         }}
       >
         <p

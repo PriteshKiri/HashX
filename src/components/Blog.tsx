@@ -79,7 +79,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           justifyContent: "space-between",
           alignItems: "center",
           position: "sticky",
-          padding: 20,
+          padding: 15,
           background: "black",
           top: 0,
         }}
@@ -116,7 +116,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             <path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
           </svg>
-        
         </div>
 
         <a href={data?.post?.url} target="_blank" rel="noopener noreferrer">
@@ -162,7 +161,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             src={data?.post?.coverImage?.url}
             alt="blog cover"
             style={{
-              height: "185px",
               width: "100%",
               borderRadius: "8px",
             }}
@@ -186,7 +184,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               fontSize: 14,
               fontWeight: 500,
               color: "#9b9b9b",
-              margin:"15px 0px"
+              margin: "15px 0px",
             }}
           >
             {data?.post?.subtitle}

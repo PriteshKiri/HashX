@@ -52,7 +52,10 @@ const Profile = ({ data, handleRead }: any) => {
       >
         {data?.me?.name}
       </h1>
-      <p className="hx-p" style={{ textAlign: "center", color: "#808080",margin:"12px auto" }}>
+      <p
+        className="hx-p"
+        style={{ textAlign: "center", color: "#808080", margin: "12px auto" }}
+      >
         {data?.me?.tagline}
       </p>
       <div
@@ -60,7 +63,7 @@ const Profile = ({ data, handleRead }: any) => {
           display: "flex",
           gap: 25,
           justifyContent: "center",
-          marginTop: "15px",
+          marginTop: "5px",
         }}
       >
         <p
