@@ -14,7 +14,7 @@ const Personalized = ({ handleRead, handleShowProfile }: any) => {
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
+      // console.log(username, "usererrfet");
 
       if (username !== "" || username !== null || username !== undefined) {
         setPAT(username);

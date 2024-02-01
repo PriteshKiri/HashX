@@ -187,6 +187,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               fontSize: 14,
               fontWeight: 500,
               color: "#9b9b9b",
+              margin:"15px 0px"
             }}
           >
             {data?.post?.subtitle}

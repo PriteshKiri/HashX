@@ -185,7 +185,7 @@ const SearchLayout = () => {
             className="bdr-b bdr-l"
           >
             {Object.keys(userDetails)?.length === 0 ? (
-              <p style={{ fontWeight: "600", margin: "0px", color: "white" }}>
+              <p style={{ fontWeight: "600", margin: "0px", color: "white",fontSize:"14px" }}>
                 Search Hashnode User
               </p>
             ) : (
