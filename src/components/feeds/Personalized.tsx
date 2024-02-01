@@ -30,7 +30,7 @@ const Personalized = ({ handleRead, handleShowProfile }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 40, filter: { type: PERSONALIZED }) {
+            feed(first: 50, filter: { type: PERSONALIZED }) {
               edges {
                 node {
                   title
@@ -68,7 +68,7 @@ const Personalized = ({ handleRead, handleShowProfile }: any) => {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response?.errors?.length) {
               setFetchMode(false);
             } else {
@@ -88,9 +88,11 @@ const Personalized = ({ handleRead, handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "82vh",
+        height: "calc(100vh - 180px)", 
         padding: "15px",
-        gap: 15,
+        gap: "15px",
+        boxSizing:"content-box"
+
       }}
     >
       {snackbar && (

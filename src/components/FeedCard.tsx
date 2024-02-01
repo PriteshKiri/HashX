@@ -95,7 +95,9 @@ const FeedCard = ({
           </div>
         </div>
 
-        <p className="hx-p">{formatDate(item?.node?.publishedAt)}</p>
+        <p className="hx-p" style={{ color: "white" }}>
+          {formatDate(item?.node?.publishedAt)}
+        </p>
       </div>
       <div
         style={{
@@ -107,7 +109,7 @@ const FeedCard = ({
           margin: "5px 0px",
         }}
       >
-        <h3 className="hx-h3" style={{ margin: 0 }}>
+        <h3 className="hx-h3" style={{ margin: 0, color: "white" }}>
           {item?.node?.title}
         </h3>
         <p
@@ -115,6 +117,7 @@ const FeedCard = ({
             margin: 0,
             color: "rgb(148, 163, 184)",
             fontSize: 10,
+            lineHeight: "20px",
           }}
           dangerouslySetInnerHTML={{ __html: item?.node?.brief || "" }}
         ></p>
@@ -151,11 +154,12 @@ const FeedCard = ({
                 background: "#ff191938",
                 borderRadius: "50%",
                 padding: "3px",
-                width: "14px",
-                height: "14px",
+                width: "20px",
+                height: "20px",
+                boxSizing: "border-box",
               }}
-              width="14"
-              height="14"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#ff4500"
@@ -185,11 +189,12 @@ const FeedCard = ({
                 background: "#00abfb47",
                 borderRadius: "50%",
                 padding: "3px",
-                width: "14px",
-                height: "14px",
+                width: "20px",
+                height: "20px",
+                boxSizing: "border-box",
               }}
-              width="14"
-              height="14"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#00abfb"
@@ -219,11 +224,12 @@ const FeedCard = ({
                 background: "#730dff63",
                 borderRadius: "50%",
                 padding: "3px",
-                width: "14px",
-                height: "14px",
+                width: "20px",
+                height: "20px",
+                boxSizing: "border-box",
               }}
-              width="14"
-              height="14"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#a564ff"
@@ -251,7 +257,12 @@ const FeedCard = ({
           >
             Read
           </button>
-          <a href={item?.node?.url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={item?.node?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mycenter"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-external-link"

@@ -64,7 +64,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
   useEffect(() => {
     getBlog({ variables: { id } });
   }, []);
-  console.log(data);
   if (loading) return <Loader />;
   if (error) return <p>Error : {error.message}</p>;
   return (
@@ -118,7 +117,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             <path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
           </svg>
-          <p style={{ margin: 0, fontSize: "14px" }}>Back</p>
+          <p style={{ margin: 0, fontSize: "14px", color: "white" }}>Back</p>
         </div>
 
         <a href={data?.post?.url} target="_blank" rel="noopener noreferrer">
@@ -133,7 +132,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
             height="18"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke="#94a3b8"
+            stroke="#ffffff"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -153,8 +152,10 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           flexDirection: "column",
           gap: 5,
           overflowY: "scroll",
-          height: "82vh",
+          height: "calc(100vh - 190px)",
           position: "relative",
+          boxSizing: "content-box",
+          paddingTop: "10px",
         }}
       >
         <div style={{ margin: "15px 0px" }} className="mycenter">
@@ -217,6 +218,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
               fontWeight: "600",
               display: "flex",
               gap: "3px",
+              color: "white",
             }}
           >
             {data?.post?.author?.name} ·{" "}
@@ -232,7 +234,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
 
         <div
           className="post-details"
-          style={{ marginBottom: "40px" }}
           dangerouslySetInnerHTML={{ __html: data?.post?.content?.html || "" }}
         />
       </div>

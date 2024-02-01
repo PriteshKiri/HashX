@@ -13,8 +13,9 @@ const Profile = ({ data, handleRead }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "84vh",
+        height: "calc(100svh - 170px)",
         padding: "20px",
+        boxSizing: "content-box",
       }}
       className="gradient-bg-profile"
     >
@@ -27,8 +28,8 @@ const Profile = ({ data, handleRead }: any) => {
       )}
       <div className="mycenter">
         <img
-        src={data?.me?.profilePicture}
-        alt="Profile on hashnode"
+          src={data?.me?.profilePicture}
+          alt="Profile on hashnode"
           style={{
             height: "140px",
             width: "140px",
@@ -59,16 +60,34 @@ const Profile = ({ data, handleRead }: any) => {
           display: "flex",
           gap: 25,
           justifyContent: "center",
-          marginTop: "7px",
+          marginTop: "15px",
         }}
       >
-        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
+        <p
+          style={{
+            fontSize: "14px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+            color: "white",
+          }}
+        >
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.me?.followersCount)}
           </span>{" "}
           Followers
         </p>
-        <p style={{ fontSize: "14px",display:"flex",justifyContent:"center",alignItems:"center",gap:"5px", }}>
+        <p
+          style={{
+            fontSize: "14px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+            color: "white",
+          }}
+        >
           <span style={{ fontWeight: 600 }}>
             {formatFollowersNumber(data?.me?.followingsCount)}
           </span>{" "}
@@ -91,7 +110,6 @@ const Profile = ({ data, handleRead }: any) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          marginBottom: "40px",
         }}
       >
         {Boolean(data?.me?.posts?.edges?.length) &&

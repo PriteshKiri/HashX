@@ -14,7 +14,7 @@ const Featured = ({ handleRead, handleShowProfile }: any) => {
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
+      // console.log(username, "usererrfet");
 
       if (username !== "" || username !== null || username !== undefined) {
         setPAT(username);
@@ -30,7 +30,7 @@ const Featured = ({ handleRead, handleShowProfile }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 40, filter: { type: FEATURED }) {
+            feed(first: 50, filter: { type: FEATURED }) {
               edges {
                 node {
                   title
@@ -68,7 +68,7 @@ const Featured = ({ handleRead, handleShowProfile }: any) => {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response?.errors?.length) {
               setFetchMode(false);
             } else {
@@ -88,9 +88,10 @@ const Featured = ({ handleRead, handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "82vh",
+        height: "calc(100vh - 180px)", 
         padding: "15px",
-        gap: 15,
+        gap: "15px",
+        boxSizing:"content-box"
       }}
     >
       {snackbar && (

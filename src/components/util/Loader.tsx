@@ -13,7 +13,7 @@ const Loader = () => {
   return (
     <div
       style={{
-        height: "90vh",
+        height: "92vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -37,7 +37,7 @@ const Loader = () => {
           }
         `}
           </style>
-          <p style={{ fontSize: "14px", marginTop: "10px" }}>Loading...</p>
+          <p style={{ fontSize: "14px", marginTop: "10px",color:"white" }}>Loading...</p>
         </>
       )}
     </div>

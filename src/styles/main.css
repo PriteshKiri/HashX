@@ -63,8 +63,9 @@
   border-radius: 25px;
   border: 1px solid rgb(30 41 59 / 0.8);
   outline: none;
-  width: 130%;
+  width: 315px;
   cursor: pointer;
+  font-size: 12px;
 }
 
 .hx-input::placeholder {

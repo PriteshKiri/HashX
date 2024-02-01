@@ -13,8 +13,9 @@ const SearchProfile = ({ data, handleRead }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "84vh",
+        height: "calc(100vh - 172px)",
         padding: "20px",
+        boxSizing: "content-box",
       }}
       className="gradient-bg-profile"
     >
@@ -69,6 +70,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
+            color: "white",
           }}
         >
           <span style={{ fontWeight: 600 }}>
@@ -83,6 +85,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
+            color: "white",
           }}
         >
           <span style={{ fontWeight: 600 }}>
@@ -107,7 +110,6 @@ const SearchProfile = ({ data, handleRead }: any) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          marginBottom: "40px",
         }}
       >
         {Boolean(data?.user?.posts?.edges?.length) &&

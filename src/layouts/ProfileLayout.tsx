@@ -34,10 +34,9 @@ const ProfileLayout = () => {
     event.preventDefault();
     setGlobalPAT(pat);
     if (pat) {
-      console.log(pat, "new user name");
       if (window.chrome) {
         window.chrome.storage.local.set({ username: pat }).then(() => {
-          console.log(pat, "value is set");
+          // console.log(pat, "value is set");
           setCheckCredentials(true);
           setFetchMode(true);
         });
@@ -47,28 +46,23 @@ const ProfileLayout = () => {
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
+      // console.log(username, "usererrfet");
 
-      if (
-        username 
-      ) {
+      if (username) {
         setPAT(username);
         setGlobalPAT(username);
         setFetchMode(true);
-        console.log(username, "inside" );
 
-        console.log("setpat");
       } else {
         setLogOut(true);
         setFetchMode(false);
-        console.log("else setpat");
       }
     });
   }, []);
 
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
+      // console.log(username, "usererrfet");
       if (username === "" || username === null || username === undefined) {
         setFetchMode(false);
       }
@@ -108,7 +102,7 @@ const ProfileLayout = () => {
             edges {
               node {
                 title
-                posts(first: 10) {
+                posts(first: 20) {
                   edges {
                     node {
                       title
@@ -128,7 +122,7 @@ const ProfileLayout = () => {
               }
             }
           }
-          posts(pageSize: 10, page: 10) {
+          posts(pageSize: 10, page: 20) {
             edges {
               node {
                 title
@@ -167,7 +161,7 @@ const ProfileLayout = () => {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response?.errors?.length) {
               setLogOut(true);
               setFetchMode(false);
@@ -212,14 +206,14 @@ const ProfileLayout = () => {
             }}
             className="bdr-b"
           >
-            <p style={{ fontWeight: "600", margin: "0px", fontSize: "14px" }}>
+            <p style={{ fontWeight: "600", margin: "0px", fontSize: "14px",color:"white" }}>
               Profile
             </p>
           </div>
         )}
         {logout && open && (
           <div
-            style={{ flexDirection: "column", height: "90vh" }}
+            style={{ flexDirection: "column", height: "calc(100vh - 78px)" }}
             className="mycenter gradient-bg"
           >
             {snackbar && (
@@ -291,7 +285,7 @@ const ProfileLayout = () => {
               }}
             >
               {checkCredentials ? (
-                <p style={{ fontSize: "12px", fontWeight: "bold" }}>
+                <p style={{ fontSize: "12px", fontWeight: "bold",color:"white" }}>
                   Checking your token. Please wait!
                 </p>
               ) : (

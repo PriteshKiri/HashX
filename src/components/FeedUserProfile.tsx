@@ -115,7 +115,7 @@ const FeedUserProfile = ({ username, setShowFeedUserProfile }: any) => {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response?.errors?.length) {
             setLogOut(true);
             setFetchMode(false);
@@ -202,7 +202,7 @@ const FeedUserProfile = ({ username, setShowFeedUserProfile }: any) => {
                   <path d="M5 12l6 6" />
                   <path d="M5 12l6 -6" />
                 </svg>
-                <p style={{ margin: 0,fontSize:"14px" }}>Back</p>
+                <p style={{ margin: 0,fontSize:"14px",color:"white" }}>Back</p>
               </div>
 
               <a
@@ -221,7 +221,7 @@ const FeedUserProfile = ({ username, setShowFeedUserProfile }: any) => {
                   height="18"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#94a3b8"
+                  stroke="#ffffff"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"

@@ -69,7 +69,7 @@ const SearchLayout = () => {
             edges {
               node {
                 title
-                posts(first: 10) {
+                posts(first: 20) {
                   edges {
                     node {
                       title
@@ -89,7 +89,7 @@ const SearchLayout = () => {
               }
             }
           }
-          posts(pageSize: 10, page: 10) {
+          posts(pageSize: 10, page: 20) {
             edges {
               node {
                 title
@@ -126,7 +126,7 @@ const SearchLayout = () => {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response?.errors?.length) {
               setLogOut(true);
               setFetchMode(false);
@@ -185,7 +185,7 @@ const SearchLayout = () => {
             className="bdr-b bdr-l"
           >
             {Object.keys(userDetails)?.length === 0 ? (
-              <p style={{ fontWeight: "600", margin: "0px" }}>
+              <p style={{ fontWeight: "600", margin: "0px", color: "white" }}>
                 Search Hashnode User
               </p>
             ) : (
@@ -234,7 +234,9 @@ const SearchLayout = () => {
                     <path d="M5 12l6 6" />
                     <path d="M5 12l6 -6" />
                   </svg>
-                  <p style={{ margin: 0, fontSize: "14px" }}>Back</p>
+                  <p style={{ margin: 0, fontSize: "14px", color: "white" }}>
+                    Back
+                  </p>
                 </div>
 
                 <a
@@ -253,7 +255,7 @@ const SearchLayout = () => {
                     height="18"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="#94a3b8"
+                    stroke="#ffffff"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -322,7 +324,13 @@ const SearchLayout = () => {
                 }}
               >
                 {checkCredentials ? (
-                  <p style={{ fontSize: "12px", fontWeight: "bold" }}>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "bold",
+                      color: "white",
+                    }}
+                  >
                     Checking the username. Please wait!
                   </p>
                 ) : (

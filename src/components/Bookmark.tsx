@@ -10,7 +10,6 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
   const [feedData, setFeedData]: any = useState({});
   useEffect(() => {
     window.chrome.storage.local.get(["username"]).then(({ username }: any) => {
-      console.log(username, "usererrfet");
 
       if (username !== "" || username !== null || username !== undefined) {
         setPAT(username);
@@ -26,7 +25,7 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
     if (fetchMode) {
       const query = `
           {
-            feed(first: 20, filter: { type: BOOKMARKS }) {
+            feed(first: 50, filter: { type: BOOKMARKS }) {
               edges {
                 node {
                   title
@@ -64,7 +63,7 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response?.errors?.length) {
               setFetchMode(false);
             } else {
@@ -84,9 +83,10 @@ const Bookmark = ({ handleRead, handleShowProfile }: any) => {
         display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
-        height: "84vh",
+        height: "calc(100vh - 160px)", 
         padding: "15px",
-        gap: 15,
+        gap: "15px",
+        boxSizing:"content-box"
       }}
       className="gradient-bg-profile"
     >

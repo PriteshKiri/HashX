@@ -326,7 +326,7 @@ const Layout = ({ children }: any) => {
                 setGlobalPAT("");
                 if (window.chrome) {
                   window.chrome.storage.local.set({ username: "" }).then(() => {
-                    console.log("value is removed");
+                    // console.log("value is removed");
                     setLogout(true);
                   });
                 }
@@ -381,7 +381,7 @@ const Layout = ({ children }: any) => {
               right: "0",
               backgroundColor: "black",
             }}
-            className="mycenter bdr-t"
+            className="mycenter bdr-t bdr-l"
           >
             <small style={{ fontSize: "11px" }}>
               Made with &lt; 🧠 /&gt; by{" "}
@@ -390,6 +390,7 @@ const Layout = ({ children }: any) => {
                 style={{
                   color: "white",
                 }}
+                className="hx-link"
               >
                 Pritesh Kiri
               </a>

@@ -52,7 +52,7 @@ const BookmarkLayout = () => {
           }}
           className="bdr-b"
         >
-          <p style={{ fontWeight: "600", margin: "0px" }}>Bookmarks</p>
+          <p style={{ fontWeight: "600", margin: "0px",color:"white" }}>Bookmarks</p>
         </div>
         <Bookmark handleRead={handleRead} handleShowProfile={handleShowProfile}  />
       </div>
