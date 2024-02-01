@@ -71,7 +71,6 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 5,
       }}
     >
       <div
@@ -152,7 +151,7 @@ const Blog = ({ id, setShowBlog }: BlogProps) => {
           flexDirection: "column",
           gap: 5,
           overflowY: "scroll",
-          height: "calc(100vh - 179px)",
+          height: "calc(100vh - 173px)",
           position: "relative",
           boxSizing: "content-box",
           paddingTop: "10px",

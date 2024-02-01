@@ -52,7 +52,7 @@ const SearchProfile = ({ data, handleRead }: any) => {
       >
         {data?.user?.name}
       </h1>
-      <p className="hx-p" style={{ textAlign: "center", color: "#808080" }}>
+      <p className="hx-p" style={{ textAlign: "center", color: "#808080",margin:"12px auto" }}>
         {data?.user?.tagline}
       </p>
       <div
