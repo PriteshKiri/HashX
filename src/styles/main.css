@@ -210,10 +210,16 @@
   border-radius: 8px;
 }
 
-.post-details UL {
+.post-details ul {
   margin: 5px;
   padding: 5px 15px;
 }
+
+.post-details ol {
+  margin: 5px;
+  padding: 5px 15px;
+}
+
 .post-details li {
   list-style: square;
   font-size: 12px;
