@@ -223,17 +223,17 @@ const ProfileLayout = () => {
                 type={snackbar.type}
               />
             )}
-            <div
+            <img
+            src="https://res.cloudinary.com/ddlhk5yje/image/upload/v1705917787/hashx/hashx_bkm3wo.png"
+            alt="HashX logo"
               style={{
                 height: "120px",
                 width: "120px",
                 margin: "11px auto",
                 borderRadius: "50%",
-                backgroundImage: `url("https://res.cloudinary.com/ddlhk5yje/image/upload/v1705917787/hashx/hashx_bkm3wo.png")`,
-                backgroundSize: "cover",
                 marginTop: "-75px",
               }}
-            ></div>
+            ></img>
             <h1
               className="hx-h1"
               style={{
