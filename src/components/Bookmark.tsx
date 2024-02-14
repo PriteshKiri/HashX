@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SetPATContext } from "../Layout";
+import { SetPATContext } from "../layouts/Layout";
 import FeedCard from "./FeedCard";
 import Loader from "./util/Loader";
 

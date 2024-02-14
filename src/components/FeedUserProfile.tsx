@@ -3,7 +3,7 @@ import {
   LogOutContext,
   SetLogOutContext,
   SideBarStatusContext,
-} from "../Layout";
+} from "../layouts/Layout";
 import Profile from "../components/Profile";
 import SearchProfile from "../components/SearchProfile";
 import Blog from "../components/Blog";

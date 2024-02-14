@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Layout } from "./Layout";
+import { Layout } from "./layouts/Layout";
 import Main from "./Main";
 
 function App() {

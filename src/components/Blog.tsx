@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useRef, FormEvent } from "react";
-import { LogOutContext, SetLogOutContext } from "../Layout";
+import { LogOutContext, SetLogOutContext } from "../layouts/Layout";
 import Loader from "../components/util/Loader";
 import { copyToClipboard, formatDate, useSnackbar } from "../util";
 import SnackBar from "../components/util/SnackBar";

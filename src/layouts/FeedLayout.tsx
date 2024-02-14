@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Blog from "../components/Blog";
-import { SetPATContext, SideBarStatusContext } from "../Layout";
+import { SetPATContext, SideBarStatusContext } from "./Layout";
 import Personalized from "../components/feeds/Personalized";
 import Following from "../components/feeds/Following";
 import Featured from "../components/feeds/Featured";

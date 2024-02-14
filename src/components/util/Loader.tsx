@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SideBarStatusContext } from "../../Layout";
+import { SideBarStatusContext } from "../../layouts/Layout";
 
 const Loader = () => {
   const open: any = useContext(SideBarStatusContext);

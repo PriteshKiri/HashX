@@ -5,7 +5,7 @@ import {
   SetLogOutContext,
   SideBarStatusContext,
   TabContext,
-} from "./Layout";
+} from "./layouts/Layout";
 import FeedLayout from "./layouts/FeedLayout";
 import BookmarkLayout from "./layouts/BookmarkLayout";
 import SearchLayout from "./layouts/SearchLayout";

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-import Tooltip from "./components/util/Tooltip";
-import { useSnackbar } from "./util";
-import SnackBar from "./components/util/SnackBar";
+import Tooltip from "../components/util/Tooltip";
+import { useSnackbar } from "../util";
+import SnackBar from "../components/util/SnackBar";
 const TabContext = createContext<string | undefined>(undefined);
 const PATContext = createContext<string | undefined>(undefined);
 const LogOutContext = createContext<boolean | undefined>(undefined);

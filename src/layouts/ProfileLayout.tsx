@@ -4,7 +4,7 @@ import {
   SetLogOutContext,
   SetPATContext,
   SideBarStatusContext,
-} from "../Layout";
+} from "./Layout";
 import Loader from "../components/util/Loader";
 import Profile from "../components/Profile";
 import Blog from "../components/Blog";
